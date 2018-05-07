@@ -6,4 +6,4 @@ MergeColumns = function(c1, c2){
   )
 }
 
-MergeColumns.unlistUnique = compose(sort, unique, unlist, na.last=NA)
+MergeColumns.unlistUnique = compose(sort, unique, unlist)

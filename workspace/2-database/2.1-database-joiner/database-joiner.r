@@ -19,7 +19,7 @@ games.mobygames = readRDS("../../1-datasource/1.2-mobygames/data/parsed/games.rd
 # JOIN GAME INFO
 # ==============================================================================
 games = games.wikidata %>%
-  inner_join(games.mobygames, by=c("WD_GameID" = "MB_GameID")) %>%
+  left_join(games.mobygames, by=c("WD_GameID" = "MB_GameID")) %>%
   na_if("NULL") %>%
   transmute(
     ID       = WD_GameID,
