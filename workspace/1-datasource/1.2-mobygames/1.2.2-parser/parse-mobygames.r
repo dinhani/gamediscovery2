@@ -22,6 +22,9 @@ games = pblapply(games.files, ParseMobyGamesHTMLFile) %>%
     Platform = if_else(is.na(Platforms), Platform, Platforms)
   )
 
+# add column prefix
+colnames(games) = paste0("MG_", colnames(games))
+
 # ==============================================================================
 # SAVE GAMES
 # ==============================================================================
