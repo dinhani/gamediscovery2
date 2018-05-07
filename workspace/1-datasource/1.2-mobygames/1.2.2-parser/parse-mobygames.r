@@ -23,7 +23,7 @@ games = pblapply(games.files, ParseMobyGamesHTMLFile) %>%
   )
 
 # add column prefix
-colnames(games) = paste0("MG_", colnames(games))
+colnames(games) = paste0("MB_", colnames(games))
 
 # ==============================================================================
 # SAVE GAMES
