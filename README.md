@@ -1,1 +1,1 @@
-# gamediscovery2
+# Game Discovery
