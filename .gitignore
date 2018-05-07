@@ -1,5 +1,7 @@
 # Data files
+*.rds
 *.csv
+*.tsv
 *.json
 *.html
 

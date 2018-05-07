@@ -18,7 +18,7 @@ source("functions/ReadGameRelationships.r",  encoding="UTF-8")
 # ==============================================================================
 # READ GAMES
 # ==============================================================================
-games = fread("../data/raw/Game.csv") %>%
+games = fread("../data/raw/Game.tsv") %>%
   mutate(
     GameID    = ParseEntityID(GameID),
     GameLabel = ParseEntityLabel(GameLabel),
@@ -41,7 +41,4 @@ games.joined = append(games.relationships, list(games), 0) %>%
 # ==============================================================================
 # SAVES GAMES
 # ==============================================================================
-games.joined %>%
-  toJSON() %>%
-  write(file = "../data/parsed/games.json")
-  
+games.joined %>% saveRDS("../data/parsed/games.rds")
