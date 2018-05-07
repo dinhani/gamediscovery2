@@ -1,7 +1,7 @@
 # ==============================================================================
 # LIBRARIES
 # ==============================================================================
-source("../../index.r", encoding = "UTF-8")
+source("../../libraries.r", encoding = "UTF-8")
 
 # ==============================================================================
 # FUNCTIONS
@@ -16,7 +16,7 @@ games.files = list.files("../data/raw", pattern = "*.html", full.names = TRUE)
 # ==============================================================================
 # PARSE FILES
 # ==============================================================================
-games = pblapply(games.files, ParseMobyGamesHTMLFile) %>% 
+games = pblapply(games.files, ParseMobyGamesHTMLFile) %>%
   rbindlist(fill = TRUE) %>%
   mutate(
     Platform = if_else(is.na(Platforms), Platform, Platforms)
