@@ -1,4 +1,7 @@
-ReadGameRelationships = function(filename){
+# ==============================================================================
+# Read Wikidata relationship file
+# ==============================================================================
+ParseWikidataRelationshipFile = function(filename){
   print(filename)
 
   # read file
@@ -9,12 +12,12 @@ ReadGameRelationships = function(filename){
       # parse IDs
       mutate_at(
         vars(ends_with("ID")),
-        ParseEntityID
+        ParseWikidataID
       ) %>%
       # parse Labels
       mutate_at(
         vars(ends_with("Label")),
-        ParseEntityLabel
+        ParseWikidataLabel
       ) %>%
       # group by game
       group_by(GameID) %>%

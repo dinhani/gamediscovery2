@@ -1,7 +1,6 @@
 # ==============================================================================
-# Parse Wikidata entity label format
+# Parse Wikidata entity ID format
 # ==============================================================================
-ParseEntityLabel = function(labels){
-    labels = gsub("@en", "", labels)
-    labels = gsub("\"", "", labels)
+ParseWikidataID = function(ids){
+  ids = str_extract(ids, "(?<=Q).+(?=>)")
 }

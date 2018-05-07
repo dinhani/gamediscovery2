@@ -1,7 +1,7 @@
 # ==============================================================================
-# Parse Wikidata entity link format
+# Parse Wikidata entity label format
 # ==============================================================================
-ParseEntityLink = function(links){
-    links = gsub("<", "", links)
-    links = gsub(">", "", links)
+ParseWikidataLabel = function(labels){
+    labels = gsub("@en", "", labels)
+    labels = gsub("\"", "", labels)
 }

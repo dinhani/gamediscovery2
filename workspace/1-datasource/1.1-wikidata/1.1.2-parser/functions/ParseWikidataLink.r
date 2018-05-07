@@ -1,6 +1,7 @@
 # ==============================================================================
-# Parse Wikidata entity ID format
+# Parse Wikidata entity link format
 # ==============================================================================
-ParseEntityID = function(ids){
-  ids = str_extract(ids, "(?<=Q).+(?=>)")
+ParseWikidataLink = function(links){
+    links = gsub("<", "", links)
+    links = gsub(">", "", links)
 }
