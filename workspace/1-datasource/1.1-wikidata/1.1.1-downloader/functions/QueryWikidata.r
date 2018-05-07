@@ -7,12 +7,12 @@ QueryWikidata = function(entityPrefix, entityCondition, additionalEntityPrefix =
     # ==========================================================================
     # SELECT
     # ==========================================================================
-    query = "SELECT ?${entityPrefix} ?${entityPrefix}Label"
+    query = "SELECT (?${entityPrefix} AS ?${entityPrefix}ID) ?${entityPrefix}Label"
     if(entityLink){
         query = paste(query, "?${entityPrefix}Link")
     }
     if(additionalEntityPrefix != ""){
-        query = paste(query, "?${additionalEntityPrefix} ?${additionalEntityPrefix}Label")
+        query = paste(query, "(?${additionalEntityPrefix} AS ?${additionalEntityPrefix}ID) ?${additionalEntityPrefix}Label")
         if(additionalEntityLink){
             query = paste(query, "?${additionalEntityPrefix}Link")
         }

@@ -1,5 +1,6 @@
 # Data files
 *.csv
+*.json
 *.html
 
 # R files

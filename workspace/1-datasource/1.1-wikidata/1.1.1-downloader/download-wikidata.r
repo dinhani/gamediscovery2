@@ -9,11 +9,10 @@ library(SPARQL)
 # ==============================================================================
 # FUNCTIONS
 # ==============================================================================
-source("functions/QueryWikidata.r"        , encoding="UTF-8")
-source("functions/SaveWikidata.r"         , encoding="UTF-8")
-
-source("functions/DownloadRelationships.r", encoding="UTF-8")
-source("functions/DownloadRelationshipsOfGames.r"        , encoding="UTF-8")
+source("functions/QueryWikidata.r",                 encoding="UTF-8")
+source("functions/SaveWikidata.r",                  encoding="UTF-8")
+source("functions/DownloadRelationships.r",         encoding="UTF-8")
+source("functions/DownloadRelationshipsOfGames.r" , encoding="UTF-8")
 
 # ==============================================================================
 # DOWNLOAD - GAMES
