@@ -11,7 +11,7 @@ source("functions/RecodeGenre.r", encoding = "UTF-8")
 source("functions/RecodePlatform.r", encoding = "UTF-8")
 
 # ==============================================================================
-# READ GAME INFO
+# READ GAMES
 # ==============================================================================
 games = readRDS("../2.1-dataset-joiner/data/games.rds")
 
@@ -20,11 +20,11 @@ games = readRDS("../2.1-dataset-joiner/data/games.rds")
 # ==============================================================================
 games = games %>%
   mutate(
-    Genre    = sapply(Genre, FUN=RecodeGenre),
+    Genre    = sapply(Genre,    FUN=RecodeGenre),
     Platform = sapply(Platform, FUN=RecodePlatform)
   )
 
 # ==============================================================================
-# SAVE GAME INFO
+# SAVE GAMES
 # ==============================================================================
 saveRDS(games, file = "data/games.rds")

@@ -9,13 +9,13 @@ source("../../../libraries.r", encoding = "UTF-8")
 source("functions/MergeColumns.r", encoding="UTF-8")
 
 # ==============================================================================
-# READ GAME INFO
+# READ GAMES
 # ==============================================================================
 games.wikidata  = readRDS("../../1-datasource/1.1-wikidata/1.1.2-parser/data/games.rds")
 games.mobygames = readRDS("../../1-datasource/1.2-mobygames/1.2.2-parser/data/games.rds")
 
 # ==============================================================================
-# JOIN GAME INFO
+# JOIN GAMES
 # ==============================================================================
 games = games.wikidata %>%
   left_join(games.mobygames, by=c("WD_GameID" = "MB_GameID")) %>%
@@ -27,6 +27,6 @@ games = games.wikidata %>%
   )
 
 # ==============================================================================
-# SAVE GAME INFO
+# SAVE GAMES
 # ==============================================================================
 saveRDS(games, file = "data/games.rds")

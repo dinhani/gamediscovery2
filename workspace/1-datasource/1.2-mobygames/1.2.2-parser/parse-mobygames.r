@@ -34,6 +34,6 @@ games = pblapply(cl=cl, games.files, ParseMobyGamesHTMLFile) %>%
 colnames(games) = paste0("MB_", colnames(games))
 
 # ==============================================================================
-# SAVE GAME INFO
+# SAVE GAMES
 # ==============================================================================
 saveRDS(games, file = "data/games.rds")
