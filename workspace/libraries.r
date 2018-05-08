@@ -9,7 +9,7 @@ library(dplyr)
 library(foreach)
 library(purrr)
 
-# Time-Series
+# Time Series
 library(zoo)
 library(xts)
 

@@ -2,8 +2,8 @@ MergeColumns = function(c1, c2){
   merged = apply(
     cbind(c1, c2),
     MARGIN=1,
-    FUN=MergeColumns.unlistUnique
+    FUN=MergeColumns.unique
   )
 }
 
-MergeColumns.unlistUnique = compose(sort, unique, unlist)
+MergeColumns.unique = compose(sort, unique, unlist)

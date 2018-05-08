@@ -1,7 +1,10 @@
 # ==============================================================================
 # LIBRARIES
 # ==============================================================================
-source("../../libraries.r", encoding = "UTF-8")
+source("../../../libraries.r", encoding = "UTF-8")
+
+cl = makeCluster(7)
+registerDoParallel(cl)
 
 # ==============================================================================
 # READ GAMES
@@ -11,7 +14,7 @@ games = readRDS("../../1.1-wikidata/data/parsed/games.rds")
 # ==============================================================================
 # DOWNLOAD GAMES
 # ==============================================================================
-foreach(game.id.wikidata = games$GameID, game.id.mobygames=games$MobyGamesLabel) %do% {
+foreach(game.id.wikidata = games$GameID, game.id.mobygames=games$MobyGamesLabel) %dopar% {
   # do not download if without id
   if(game.id.mobygames == ""){
     next
