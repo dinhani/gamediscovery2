@@ -32,8 +32,7 @@ games.relationships = lapply(games.relationships.files, ParseWikidataRelationshi
 # JOIN GAMES AND RELATIONSHIPS
 # ==============================================================================
 games = append(games.relationships, list(games.base), 0) %>%
-  reduce(left_join, by="GameID") %>%
-  na_if("NULL")
+  reduce(left_join, by="GameID")
 
 # add column prefix
 colnames(games) = paste0("WD_", colnames(games))

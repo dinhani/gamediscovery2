@@ -4,6 +4,7 @@
 source("../../../libraries.r", encoding = "UTF-8")
 
 cl = makeCluster(7)
+clusterEvalQ(cl, library(httr))
 registerDoParallel(cl)
 
 # ==============================================================================
@@ -14,7 +15,7 @@ games = readRDS("../../1.1-wikidata/data/parsed/games.rds")
 # ==============================================================================
 # DOWNLOAD GAMES
 # ==============================================================================
-foreach(game.id.wikidata = games$GameID, game.id.mobygames=games$MobyGamesLabel) %dopar% {
+foreach(game.id.wikidata = games$WD_GameID, game.id.mobygames=games$WD_MobyGamesLabel) %dopar% {
   # do not download if without id
   if(game.id.mobygames == ""){
     next
