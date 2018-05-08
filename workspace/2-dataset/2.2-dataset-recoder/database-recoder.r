@@ -18,7 +18,7 @@ games = readRDS("../2.1-dataset-joiner/data/games.rds")
 # ==============================================================================
 # RECODE VALUES
 # ==============================================================================
-games.recoded = games %>%
+games = games %>%
   mutate(
     Genre    = sapply(Genre, FUN=RecodeGenre),
     Platform = sapply(Platform, FUN=RecodePlatform)
@@ -27,4 +27,4 @@ games.recoded = games %>%
 # ==============================================================================
 # SAVE GAME INFO
 # ==============================================================================
-saveRDS(games.recoded, file = "data/games.rds")
+saveRDS(games, file = "data/games.rds")
