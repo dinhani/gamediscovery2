@@ -4,7 +4,7 @@
 ParseMobyGamesHTMLFile = function(filename){
 
   # parse game id
-  game.id = str_extract(filename, "(?<=raw/)(.+)(?=.html)")
+  game.id = str_extract(filename, "(?<=data/)(.+)(?=.html)")
 
   # read HTML
   html = read_html(filename)

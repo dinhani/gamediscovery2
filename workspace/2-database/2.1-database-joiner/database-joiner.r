@@ -11,8 +11,8 @@ source("functions/MergeColumns.r", encoding="UTF-8")
 # ==============================================================================
 # READ GAME INFO
 # ==============================================================================
-games.wikidata  = readRDS("../../1-datasource/1.1-wikidata/data/parsed/games.rds")
-games.mobygames = readRDS("../../1-datasource/1.2-mobygames/data/parsed/games.rds")
+games.wikidata  = readRDS("../../1-datasource/1.1-wikidata/data/games.rds")
+games.mobygames = readRDS("../../1-datasource/1.2-mobygames/data/games.rds")
 
 # ==============================================================================
 # JOIN GAME INFO
@@ -29,4 +29,4 @@ games = games.wikidata %>%
 # ==============================================================================
 # SAVE GAME INFO
 # ==============================================================================
-saveRDS(games, file = "data/parsed/games.rds")
+saveRDS(games, file = "data/games.rds")

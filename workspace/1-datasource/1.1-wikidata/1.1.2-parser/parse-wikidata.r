@@ -15,7 +15,7 @@ source("functions/ParseWikidataLink.r",    encoding="UTF-8")
 # ==============================================================================
 # READ GAMES
 # ==============================================================================
-games.base = fread("../data/raw/Game.tsv") %>%
+games.base = fread("data/Game.tsv") %>%
   mutate(
     GameID    = ParseWikidataID(GameID),
     GameLabel = ParseWikidataLabel(GameLabel),
@@ -25,7 +25,7 @@ games.base = fread("../data/raw/Game.tsv") %>%
 # ==============================================================================
 # READ GAMES RELATIONSHIPS
 # ==============================================================================
-games.relationships.files = list.files("../data/raw", pattern = "Game-", full.names = TRUE)
+games.relationships.files = list.files("data/", pattern = "Game-", full.names = TRUE)
 games.relationships = lapply(games.relationships.files, ParseWikidataRelationshipFile)
 
 # ==============================================================================
@@ -40,4 +40,4 @@ colnames(games) = paste0("WD_", colnames(games))
 # ==============================================================================
 # SAVES GAMES
 # ==============================================================================
-games %>% saveRDS("../data/parsed/games.rds")
+games %>% saveRDS("data/games.rds")

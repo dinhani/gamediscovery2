@@ -10,7 +10,7 @@ registerDoParallel(cl)
 # ==============================================================================
 # READ GAMES
 # ==============================================================================
-games = readRDS("../../1.1-wikidata/data/parsed/games.rds")
+games = readRDS("../../1.1-wikidata/data/games.rds")
 
 # ==============================================================================
 # DOWNLOAD GAMES
@@ -22,7 +22,7 @@ foreach(game.id.wikidata = games$WD_GameID, game.id.mobygames=games$WD_MobyGames
   }
 
   # do not download if exists
-  game.filename = paste0("../data/raw/", game.id.wikidata, ".html")
+  game.filename = paste0("data/", game.id.wikidata, ".html")
   if(file.exists(game.filename)){
     next
   }

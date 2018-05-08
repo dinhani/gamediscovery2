@@ -11,7 +11,7 @@ source("functions/ParseMobyGamesHTMLFile.r", encoding="UTF-8")
 # ==============================================================================
 # READ FILES
 # ==============================================================================
-games.files = list.files("../data/raw", pattern = "*.html", full.names = TRUE)
+games.files = list.files("data/", pattern = "*.html", full.names = TRUE)
 
 # ==============================================================================
 # PARSE FILES
@@ -28,4 +28,4 @@ colnames(games) = paste0("MB_", colnames(games))
 # ==============================================================================
 # SAVE GAME INFO
 # ==============================================================================
-saveRDS(games, file = "../data/parsed/games.rds")
+saveRDS(games, file = "data/games.rds")
