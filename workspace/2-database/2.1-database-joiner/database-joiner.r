@@ -11,8 +11,8 @@ source("functions/MergeColumns.r", encoding="UTF-8")
 # ==============================================================================
 # READ GAME INFO
 # ==============================================================================
-games.wikidata  = readRDS("../../1-datasource/1.1-wikidata/data/games.rds")
-games.mobygames = readRDS("../../1-datasource/1.2-mobygames/data/games.rds")
+games.wikidata  = readRDS("../../1-datasource/1.1-wikidata/1.1.2-parser/data/games.rds")
+games.mobygames = readRDS("../../1-datasource/1.2-mobygames/1.2.2-parser/data/games.rds")
 
 # ==============================================================================
 # JOIN GAME INFO
