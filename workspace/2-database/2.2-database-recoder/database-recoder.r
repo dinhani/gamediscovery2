@@ -13,7 +13,7 @@ source("functions/RecodePlatform.r", encoding = "UTF-8")
 # ==============================================================================
 # READ GAME INFO
 # ==============================================================================
-games = readRDS("../../2-database/2.1-database-joiner/data/games.rds")
+games = readRDS("../2.1-database-joiner/data/games.rds")
 
 # ==============================================================================
 # RECODE VALUES

@@ -11,7 +11,7 @@ source("functions/ParseMobyGamesHTMLFile.r", encoding="UTF-8")
 # ==============================================================================
 # READ FILES
 # ==============================================================================
-games.files = list.files("data/", pattern = "*.html", full.names = TRUE)
+games.files = list.files("../1.2.1-downloader/data/", pattern = "*.html", full.names = TRUE)
 
 # ==============================================================================
 # PARSE FILES
