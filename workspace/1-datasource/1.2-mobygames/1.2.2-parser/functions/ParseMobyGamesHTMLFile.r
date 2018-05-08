@@ -24,20 +24,17 @@ ParseMobyGamesHTMLFile = function(filename){
     return(NULL)
   }
 
-  # genrate final dataframe
-  df = data.frame(GameID = game.id, df, stringsAsFactors = FALSE)
+  # generate final dataframe
+  data.frame(GameID = game.id, df, stringsAsFactors = FALSE)
 }
+
+ParseMobyGamesHTMLFile = possibly(ParseMobyGamesHTMLFile, otherwise=NULL)
 
 ParseMobyGamesSection = function(html, selector){
   # get attributes from section
   html.nodes = html %>%
     html_nodes(css = selector) %>%
     sapply(html_text)
-
-  # check if there are attributes
-  if(length(html.nodes) == 0){
-    return(NULL)
-  }
 
   # transform to dataframe
   df = html.nodes %>%
@@ -50,9 +47,6 @@ ParseMobyGamesSection = function(html, selector){
   df = df[-1,]
 
   # split column values
-  if(is.data.frame(df)){
-    df %>% mutate_all(str_split, pattern=", ")
-  }else{
-    NULL
-  }
+  df %>% mutate_all(str_split, pattern=", ")
 }
+ParseMobyGamesSection = possibly(ParseMobyGamesSection, otherwise=NULL)

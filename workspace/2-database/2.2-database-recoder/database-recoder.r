@@ -21,7 +21,7 @@ games = readRDS("../2.1-database-joiner/data/games.rds")
 games.recoded = games %>%
   mutate(
     Genre    = sapply(Genre, FUN=RecodeGenre),
-    Platform = sapply(Genre, FUN=RecodePlatform)
+    Platform = sapply(Platform, FUN=RecodePlatform)
   )
 
 # ==============================================================================
