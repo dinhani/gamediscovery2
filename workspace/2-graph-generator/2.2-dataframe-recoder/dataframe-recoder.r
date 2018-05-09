@@ -1,7 +1,7 @@
 # ==============================================================================
 # LIBRARIES
 # ==============================================================================
-source("../../../libraries.r", encoding = "UTF-8")
+source("../../libraries.r", encoding = "UTF-8")
 
 # ==============================================================================
 # FUNCTIONS
@@ -20,8 +20,8 @@ games = readRDS("../2.1-dataframe-joiner/data/games.rds")
 # ==============================================================================
 games = games %>%
   mutate(
-    Genre    = sapply(Genre,    FUN=RecodeGenre),
-    Platform = sapply(Platform, FUN=RecodePlatform)
+    #Genre    = sapply(Genre,    FUN=RecodeGenre),
+    #Platform = sapply(Platform, FUN=RecodePlatform)
   )
 
 # ==============================================================================

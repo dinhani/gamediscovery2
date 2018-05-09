@@ -1,7 +1,8 @@
 RecodeGenre = function(v){
+    v = str_title_case(str_replace(v, " game", ""))
+
     Recode(v,
-        "adventure game" = "Adventure",
-        "action game" = "Action",
-        "platform game" = "Platform"
+        "Role-Playing (RPG)" = "RPG",
+        "Role-Playing Video" = "RPG"
     )
 }

@@ -14,9 +14,12 @@ games = readRDS("../2.2-dataframe-recoder/data/games.rds")
 # ==============================================================================
 # DF
 graph.df = games %>%
+  # transform into long format
   gather(AttrKey, AttrValue,-c(ID, Name)) %>%
   filter(sapply(AttrValue, negate(is.null))) %>%
   unnest() %>%
+  
+  # generate IDs
   mutate(
     ID = paste("Game", Name),
     AttrID = paste(AttrKey, AttrValue)
@@ -62,3 +65,6 @@ graph = graph_from_data_frame(graph.edges, vertices = graph.vertices, directed =
 # SAVE GRAPH
 # ==============================================================================
 saveRDS(graph, file = "data/graph.rds")
+
+
+View(table(graph.df$AttrValue))

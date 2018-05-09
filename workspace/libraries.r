@@ -16,6 +16,7 @@ library(xts)
 
 # Strings
 library(stringr)
+library(lettercase)
 
 # Dates
 library(lubridate)

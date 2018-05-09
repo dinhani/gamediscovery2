@@ -1,6 +1,6 @@
-QueryByFeatures = function(g, vertices){
+QueryByFeatures = function(g, features){
     # query nearest vertices games and features
-    nearest.vertices.ids = lapply(vertices, FUN=ego, g=g, order=2)
+    nearest.vertices.ids = lapply(features, FUN=ego, g=g, order=2)
     nearest.vertices.ids = lapply(nearest.vertices.ids, FUN='[[', 1)
 
     # keep vertices that appear for all features (intersect)

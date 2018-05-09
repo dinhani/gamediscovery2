@@ -1,7 +1,7 @@
 # ==============================================================================
 # LIBRARIES
 # ==============================================================================
-source("../../../libraries.r", encoding = "UTF-8")
+source("../../libraries.r", encoding = "UTF-8")
 
 # ==============================================================================
 # FUNCTIONS
@@ -20,10 +20,12 @@ games.mobygames = readRDS("../../1-datasource/1.2-mobygames/1.2.2-parser/data/ga
 games = games.wikidata %>%
   left_join(games.mobygames, by=c("WD_GameID" = "MB_GameID")) %>%
   transmute(
-    ID       = WD_GameID,
-    Name     = WD_GameLabel,
-    Platform = MergeColumns(WD_PlatformLabel, MB_Platform),
-    Genre    = MergeColumns(WD_GenreLabel,    MB_Genre)
+    ID        = WD_GameID,
+    Name      = WD_GameLabel,
+    Series    = WD_SeriesLabel,
+    Developer = MergeColumns(WD_DeveloperLabel, MB_Developed.by),
+    Platform  = MergeColumns(WD_PlatformLabel,  MB_Platform),
+    Genre     = MergeColumns(WD_GenreLabel,     MB_Genre)
   )
 
 # ==============================================================================

@@ -15,7 +15,11 @@ source("functions/QueryByGame.r",     encoding="UTF-8")
 # ==============================================================================
 g = readRDS("../2-graph-generator/2.4-dataframe-to-graph/data/graph.rds")
 
-QueryByGame(g, "Game Grand Theft Auto III")
-QueryByFeatures(g, c("Platform PlayStation 2", "Platform PlayStation 3", "Genre Action"))
+# ==============================================================================
+# EXAMPLE QUERIES
+# ==============================================================================
+game = "Game Grand Theft Auto III"
+QueryByGame(g, game)
 
-
+features = c("Platform PlayStation 2", "Platform PlayStation 3", "Genre Action")
+QueryByFeatures(g, features)
