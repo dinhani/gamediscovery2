@@ -7,7 +7,7 @@ library(igraph)
 # ==============================================================================
 # READ GAMES
 # ==============================================================================
-games = readRDS("../2.2-dataset-recoder/data/games.rds")
+games = readRDS("../2.2-dataframe-recoder/data/games.rds")
 
 # ==============================================================================
 # GENERATE GRAPH
@@ -21,7 +21,7 @@ graph.df = games %>%
     ID = paste("Game", Name),
     AttrID = paste(AttrKey, AttrValue)
   )
-  
+
 # VERTICES
 graph.vertices1 = graph.df %>%
   select(ID, Name) %>%
@@ -43,7 +43,7 @@ graph.vertices2 = graph.df %>%
   ) %>%
   select(ID, Label, Type)
 
-graph.vertices = graph.vertices1 %>% 
+graph.vertices = graph.vertices1 %>%
   union_all(graph.vertices2) %>%
   distinct()
 
