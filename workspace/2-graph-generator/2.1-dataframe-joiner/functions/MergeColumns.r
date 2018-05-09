@@ -1,6 +1,6 @@
-MergeColumns = function(c1, c2){
+MergeColumns = function(...){
   merged = apply(
-    cbind(c1, c2),
+    cbind(...),
     MARGIN=1,
     FUN=MergeColumns.process
   )

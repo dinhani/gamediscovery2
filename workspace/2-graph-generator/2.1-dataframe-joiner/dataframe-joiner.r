@@ -24,8 +24,11 @@ games = games.wikidata %>%
     Name      = WD_GameLabel,
     Series    = WD_SeriesLabel,
     Developer = MergeColumns(WD_DeveloperLabel, MB_Developed.by),
-    Platform  = MergeColumns(WD_PlatformLabel,  MB_Platform),
-    Genre     = MergeColumns(WD_GenreLabel,     MB_Genre)
+    Platform  = MergeColumns(WD_PlatformLabel, MB_Platform),
+    
+    Genre     = MergeColumns(WD_GenreLabel, MB_Genre),
+    Setting   = MergeColumns(WD_ThemeLabel, WD_LocationLabel, WD_PeriodLabel, MB_Setting),
+    Rating    = MergeColumns(WD_ESRBLabel, WD_PEGILabel, MB_ESRB.Rating)
   )
 
 # ==============================================================================

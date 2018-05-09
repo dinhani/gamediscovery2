@@ -65,6 +65,3 @@ graph = graph_from_data_frame(graph.edges, vertices = graph.vertices, directed =
 # SAVE GRAPH
 # ==============================================================================
 saveRDS(graph, file = "data/graph.rds")
-
-
-View(table(graph.df$AttrValue))
