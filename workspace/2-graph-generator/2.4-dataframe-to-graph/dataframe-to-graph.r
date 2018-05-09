@@ -50,12 +50,13 @@ graph.vertices = graph.vertices1 %>%
 # EDGES
 graph.edges = graph.df %>%
   select(ID, AttrID) %>%
+  distinct() %>%
   mutate(
     Weight = 1
   )
 
 # GRAPH
-graph = graph_from_data_frame(graph.edges, vertices = graph.vertices)
+graph = graph_from_data_frame(graph.edges, vertices = graph.vertices, directed = FALSE)
 
 # ==============================================================================
 # SAVE GRAPH
