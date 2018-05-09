@@ -1,18 +1,18 @@
 QueryByGame = function(g, game){
   # get neighbor features
-  neighbor.features       = adjacent_vertices(g, game)[[1]]
-  neighbor.features.types = neighbor.features$Type
-  neighbor.features.table = table(neighbor.features.types)
+  neighbors.features       = adjacent_vertices(g, game)[[1]]
+  neighbors.features.types = neighbors.features$Type
+  neighbors.features.table = table(neighbors.features.types)
 
   # get neighbor games using neighbor features
-  neighbor.features.games = adjacent_vertices(g, neighbor.features)
+  neighbors.features.games = adjacent_vertices(g, neighbors.features)
 
   # transform neighbors games and features into a dataframe
-  neighbors.df = lapply(1:length(neighbor.features.games),
+  neighbors.df = lapply(1:length(neighbors.features.games),
     function(index){
       data.frame(
-        Game         = neighbor.features.games[[index]]$name,
-        FeatureType  = neighbor.features.types[index],
+        Game         = neighbors.features.games[[index]]$name,
+        FeatureType  = neighbors.features.types[index],
         stringsAsFactors = FALSE
       )
     }
@@ -21,8 +21,8 @@ QueryByGame = function(g, game){
 
   # calculate connections count and intersection
   neighbors.df = neighbors.df[
-    , 
-    .(FreqCount = .N, FreqIntersection = .N / neighbor.features.table[FeatureType]), 
+    ,
+    .(FreqCount = .N, FreqIntersection = .N / neighbors.features.table[FeatureType]),
     by=.(Game,FeatureType)
   ]
 
