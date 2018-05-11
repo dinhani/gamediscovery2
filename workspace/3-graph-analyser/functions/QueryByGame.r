@@ -22,14 +22,14 @@ QueryByGame = function(g, game){
   # calculate connections count and intersection
   neighbors.df = neighbors.df[
     ,
-    .(FreqCount = .N, FreqIntersection = .N / neighbors.features.table[FeatureType]),
+    .(FreqIntersection = .N / neighbors.features.table[FeatureType]),
     by=.(Game,FeatureType)
   ]
 
   # calculate total connections count and intersection
   neighbors.df = neighbors.df[
     ,
-    .(FreqCountTotal = sum(FreqCount), FreqIntersectionTotal = sum(FreqIntersection)),
+    .(FreqIntersectionTotal = sum(FreqIntersection)),
     by=.(Game)
   ]
 

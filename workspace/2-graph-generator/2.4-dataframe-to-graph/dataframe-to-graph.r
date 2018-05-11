@@ -5,6 +5,11 @@ source("../../libraries.r", encoding = "UTF-8")
 library(igraph)
 
 # ==============================================================================
+# FUNCTIONS
+# ==============================================================================
+source("functions/GenerateID.r", encoding = "UTF-8")
+
+# ==============================================================================
 # READ GAMES
 # ==============================================================================
 games = readRDS("../2.2-dataframe-recoder/data/games.rds")
@@ -12,21 +17,15 @@ games = readRDS("../2.2-dataframe-recoder/data/games.rds")
 # ==============================================================================
 # GENERATE GRAPH
 # ==============================================================================
-# DF
-graph.df = games %>%
-  # transform into long format
-  gather(AttrKey, AttrValue,-c(ID, Name)) %>%
-  filter(sapply(AttrValue, negate(is.null))) %>%
-  unnest() %>%
-  
-  # generate IDs
+# IDS
+games = games %>%
   mutate(
-    ID = paste("Game", Name),
-    AttrID = paste(AttrKey, AttrValue)
+    ID =     GenerateID("Game", Name),
+    TypeID = GenerateID(Type, Value)
   )
 
 # VERTICES
-graph.vertices1 = graph.df %>%
+graph.vertices.games = games %>%
   select(ID, Name) %>%
   rename(
     Label = Name
@@ -34,25 +33,26 @@ graph.vertices1 = graph.df %>%
   mutate(
     Type = "Game"
   ) %>%
-  select(ID, Label, Type)
+  select(ID, Label, Type) %>%
+  distinct(ID, .keep_all = TRUE)
 
-graph.vertices2 = graph.df %>%
-  select(AttrID, AttrKey, AttrValue) %>%
+graph.vertices.attributes = games %>%
+  select(TypeID, Type, Value) %>%
   distinct() %>%
   rename(
-    ID  = AttrID,
-    Label = AttrValue,
-    Type = AttrKey
+    ID  = TypeID,
+    Label = Value
   ) %>%
-  select(ID, Label, Type)
+  select(ID, Label, Type) %>%
+  distinct(ID, .keep_all = TRUE)
 
-graph.vertices = graph.vertices1 %>%
-  union_all(graph.vertices2) %>%
+graph.vertices = graph.vertices.games %>%
+  union_all(graph.vertices.attributes) %>%
   distinct()
 
 # EDGES
-graph.edges = graph.df %>%
-  select(ID, AttrID) %>%
+graph.edges = games %>%
+  select(ID, TypeID) %>%
   distinct() %>%
   mutate(
     Weight = 1

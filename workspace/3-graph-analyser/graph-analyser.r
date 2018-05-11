@@ -18,8 +18,8 @@ g = readRDS("../2-graph-generator/2.4-dataframe-to-graph/data/graph.rds")
 # ==============================================================================
 # EXAMPLE QUERIES
 # ==============================================================================
-game = "Game Fallout 4"
+game = "game-fallout-4"
 QueryByGame(g, game)
 
-features = c("Platform PlayStation 2", "Platform PlayStation 3", "Genre Action")
+features = c("platform-playstation-2", "platform-playstation-3", "genre-action")
 QueryByFeatures(g, features)

@@ -28,8 +28,21 @@ games = games.wikidata %>%
     
     Genre     = MergeColumns(WD_GenreLabel, MB_Genre),
     Setting   = MergeColumns(WD_ThemeLabel, WD_LocationLabel, WD_PeriodLabel, MB_Setting),
-    Rating    = MergeColumns(WD_ESRBLabel, WD_PEGILabel, MB_ESRB.Rating)
-  )
+    ESRB      = MergeColumns(WD_ESRBLabel, MB_ESRB.Rating),
+    PEGI      = WD_PEGILabel
+  ) %>%
+
+  # transform to long format
+  gather(Type, Value,-c(ID, Name)) %>%
+  filter(sapply(Value, negate(is.null))) %>%
+  unnest() %>%
+
+  # remove attributes with a single entry for all games
+  group_by(Type, Value) %>%
+  mutate(
+    Remove = Type %in% c("Genre", "Platform") && n() < 30
+  ) %>%
+  filter(Remove == FALSE)
 
 # ==============================================================================
 # SAVE GAMES
