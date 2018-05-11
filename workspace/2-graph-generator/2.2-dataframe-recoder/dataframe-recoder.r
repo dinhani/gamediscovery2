@@ -19,14 +19,10 @@ games = as.data.table(games)
 # ==============================================================================
 # RECODE VALUES
 # ==============================================================================
-t1 = Sys.time()
-
 games[Type == "ESRB",     Value := RecodeESRB(Value),]
 games[Type == "Genre",    Value := RecodeGenre(Value),]
 games[Type == "Platform", Value := RecodePlatform(Value),]
 games = unique(games)
-
-Sys.time() - t1
 
 # ==============================================================================
 # SAVE GAMES
