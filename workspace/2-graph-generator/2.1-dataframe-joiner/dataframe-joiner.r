@@ -29,9 +29,9 @@ games = games.wikidata %>%
     Person        = MergeColumns(WD_ArtistLabel, WD_ComposerLabel, WD_DesignerLabel, WD_DirectorLabel),
     Publisher     = WD_PublisherLabel,
     Platform      = MergeColumns(WD_PlatformLabel, MB_Platform),
-    RatingFeature = NULL,
     RatingESRB    = MergeColumns(WD_ESRBLabel, MB_ESRB.Rating),
     RatingPEGI    = WD_PEGILabel,
+    RatingFeature = NULL,
     Series        = WD_SeriesLabel,
     Year          = WD_ReleaseDateLabel,
 
@@ -40,20 +40,19 @@ games = games.wikidata %>%
     Engine        = WD_EngineLabel,
     GameMode      = WD_GameModeLabel,
     Genre         = MergeColumns(WD_GenreLabel, MB_Genre),
-    Graphics      = NULL,
+    Graphics      = MB_Perspective,
     Mechanics     = NULL,
 
     # PLOT
     Atmosphere    = NULL,
-    Character     = NULL,
+    Character     = WD_CharacterLabel,
     Creature      = NULL,
-    Location      = NULL,
+    Location      = WD_LocationLabel,
     Organization  = NULL,
-    Period        = NULL,
+    Period        = WD_PeriodLabel,
     Soundtrack    = NULL,
-    Setting       = MergeColumns(WD_ThemeLabel, WD_LocationLabel, WD_PeriodLabel, MB_Setting),
     SportTeam     = NULL,
-    Theme         = NULL,
+    Theme         = WD_ThemeLabel,
     Vehicle       = NULL,
     Weapon        = NULL
   ) %>%

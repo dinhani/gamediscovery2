@@ -19,10 +19,8 @@ g.es = E(g)
 # ==============================================================================
 # EXAMPLE QUERIES
 # ==============================================================================
-game = "game-the-witcher-3-wild-hunt"
-t1 = Sys.time()
+game = "game-fallout-4"
 QueryByGame(g, g.es, game)
-Sys.time() - t1
 
 features = c("platform-playstation-2", "platform-playstation-3", "genre-action")
 QueryByFeatures(g, features)

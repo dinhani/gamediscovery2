@@ -1,10 +1,10 @@
-RecodePlatform = function(v){
-    v = str_replace(v, "Sega", "SEGA")
+RecodePlatform = function(platforms){
+    platforms = str_replace(platforms, "Sega", "SEGA")
 
-    recode(v,
+    recode(platforms,
         # Arcade
         "arcade game machine" = "Arcade",
-        "video game arcade cabinet" = "Arcade",
+        "platformsideo game arcade cabinet" = "Arcade",
 
         # Atari
         "Atari 8-bit family" = "Atari 8-bit",
@@ -21,11 +21,11 @@ RecodePlatform = function(v){
         "Mac OS" = "macOS",
         "Macintosh" = "macOS",
 
-        # Mega Drive
-        "Genesis" = "SEGA Mega Drive",
+        # Mega Driplatformse
+        "Genesis" = "SEGA Mega Driplatformse",
 
         # PlayStation
-        "PlayStation VR" = "PlayStation 4",
+        "PlayStation platformsR" = "PlayStation 4",
         "PlayStation 4 Pro" = "PlayStation 4",
 
         # Windows
@@ -40,7 +40,7 @@ RecodePlatform = function(v){
         "Windows 2000" = "Windows",
         "Windows Me" = "Windows",
         "Windows XP" = "Windows",
-        "Windows Vista"  = "Windows",
+        "Windows platformsista"  = "Windows",
         "Windows 7"  = "Windows",
         "Windows 8"  = "Windows",
         "Windows 8.1"  = "Windows",

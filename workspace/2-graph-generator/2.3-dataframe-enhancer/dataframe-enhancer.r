@@ -6,8 +6,10 @@ source("../../libraries.r", encoding = "UTF-8")
 # ==============================================================================
 # FUNCTIONS
 # ==============================================================================
-source("functions/EnhanceWeight.r", encoding = "UTF-8")
-source("functions/EnhanceYear.r", encoding = "UTF-8")
+source("functions/AddCharacter.r",     encoding = "UTF-8")
+source("functions/AddWeight.r",        encoding = "UTF-8")
+source("functions/AddYear.r",          encoding = "UTF-8")
+source("functions/GenerateRowsMatchingGameName.r", encoding = "UTF-8")
 
 # ==============================================================================
 # READ GAMES
@@ -18,10 +20,14 @@ games = as.data.table(games)
 # ==============================================================================
 # ENHANCE VALUES
 # ==============================================================================
-games[              , Weight := EnhanceWeight(Type),  ]
-games[Type == "Year", Value  := EnhanceYear(Value),   ]
+games = AddCharacter(games)
+games = AddYear(games)
+games = AddWeight(games)
+
+games = unique(games)
 
 # ==============================================================================
 # SAVE GAMES
 # ==============================================================================
 saveRDS(games, file = "data/games.rds")
+

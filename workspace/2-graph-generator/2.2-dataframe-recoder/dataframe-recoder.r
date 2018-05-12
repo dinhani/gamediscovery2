@@ -28,12 +28,3 @@ games = unique(games)
 # SAVE GAMES
 # ==============================================================================
 saveRDS(games, file = "data/games.rds")
-
-games %>%
-  filter(Type == "Setting") %>%
-  group_by(Value) %>%
-  summarise(
-    N = n()
-  ) %>%
-  arrange(desc(N)) %>%
-  View

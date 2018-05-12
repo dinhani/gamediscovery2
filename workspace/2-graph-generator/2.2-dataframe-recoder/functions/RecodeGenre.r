@@ -1,8 +1,8 @@
-RecodeGenre = function(v){
-    v = str_replace(v, "( game| video game)", "") %>%
+RecodeGenre = function(genres){
+    genres = str_replace(genres, "( game| video game)", "") %>%
         str_title_case()
 
-    recode(v,
+    recode(genres,
         "Role-Playing (RPG)" = "RPG",
         "Role-Playing" = "RPG"
     )

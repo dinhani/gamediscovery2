@@ -40,4 +40,4 @@ colnames(games) = paste0("WD_", colnames(games))
 # ==============================================================================
 # SAVES GAMES
 # ==============================================================================
-games %>% saveRDS("data/games.rds")
+saveRDS(games, file = "data/games.rds")
