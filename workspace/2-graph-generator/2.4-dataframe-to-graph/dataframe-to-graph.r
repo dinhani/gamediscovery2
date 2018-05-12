@@ -12,7 +12,7 @@ source("functions/GenerateID.r", encoding = "UTF-8")
 # ==============================================================================
 # READ GAMES
 # ==============================================================================
-games = readRDS("../2.2-dataframe-recoder/data/games.rds")
+games = readRDS("../2.3-dataframe-enhancer/data/games.rds")
 
 # ==============================================================================
 # GENERATE GRAPH

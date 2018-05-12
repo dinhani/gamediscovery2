@@ -20,21 +20,13 @@ QueryByGame = function(g, game){
   neighbors.df = rbindlist(neighbors.df)
 
   # calculate connections count and intersection
-  neighbors.df = neighbors.df[
-    ,
-    .(FreqIntersection = .N / neighbors.features.table[FeatureType]),
-    by=.(Game,FeatureType)
-  ]
+  neighbors.df = neighbors.df[, .(FreqIntersection = .N / neighbors.features.table[FeatureType]), by=.(Game,FeatureType)]
 
   # calculate total connections count and intersection
-  neighbors.df = neighbors.df[
-    ,
-    .(FreqIntersectionTotal = sum(FreqIntersection)),
-    by=.(Game)
-  ]
+  neighbors.df = neighbors.df[, .(FreqIntersectionTotal = sum(FreqIntersection)), by=.(Game)]
 
   # get games games according with best intersection
-  similar.games.ids = neighbors.df[order(FreqIntersectionTotal, decreasing = TRUE),Game,]
+  similar.games.ids = neighbors.df[order(FreqIntersectionTotal, decreasing = TRUE), Game, ]
 
   # extract games
   V(g)[similar.games.ids]

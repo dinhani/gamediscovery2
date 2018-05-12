@@ -6,9 +6,9 @@ source("../../libraries.r", encoding = "UTF-8")
 # ==============================================================================
 # FUNCTIONS
 # ==============================================================================
-source("functions/RecodeESRB.r", encoding = "UTF-8")
 source("functions/RecodeGenre.r", encoding = "UTF-8")
 source("functions/RecodePlatform.r", encoding = "UTF-8")
+source("functions/RecodeRatingESRB.r", encoding = "UTF-8")
 
 # ==============================================================================
 # READ GAMES
@@ -19,9 +19,9 @@ games = as.data.table(games)
 # ==============================================================================
 # RECODE VALUES
 # ==============================================================================
-games[Type == "ESRB",     Value := RecodeESRB(Value),]
-games[Type == "Genre",    Value := RecodeGenre(Value),]
-games[Type == "Platform", Value := RecodePlatform(Value),]
+games[Type == "Genre",      Value := RecodeGenre(Value), ]
+games[Type == "Platform",   Value := RecodePlatform(Value), ]
+games[Type == "RatingESRB", Value := RecodeRatingESRB(Value), ]
 games = unique(games)
 
 # ==============================================================================
@@ -30,7 +30,7 @@ games = unique(games)
 saveRDS(games, file = "data/games.rds")
 
 games %>%
-  filter(Type == "ESRB") %>%
+  filter(Type == "Setting") %>%
   group_by(Value) %>%
   summarise(
     N = n()
