@@ -1,4 +1,4 @@
-RecodePlatform = function(platforms){
+RenamePlatform = function(platforms){
     platforms = str_replace(platforms, "Sega", "SEGA")
 
     recode(platforms,

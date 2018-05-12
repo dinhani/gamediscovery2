@@ -6,9 +6,9 @@ source("../../libraries.r", encoding = "UTF-8")
 # ==============================================================================
 # FUNCTIONS
 # ==============================================================================
-source("functions/RecodeGenre.r", encoding = "UTF-8")
-source("functions/RecodePlatform.r", encoding = "UTF-8")
-source("functions/RecodeRatingESRB.r", encoding = "UTF-8")
+source("functions/RenameGenre.r", encoding = "UTF-8")
+source("functions/RenamePlatform.r", encoding = "UTF-8")
+source("functions/RenameRatingESRB.r", encoding = "UTF-8")
 
 # ==============================================================================
 # READ GAMES
@@ -17,11 +17,11 @@ games = readRDS("../2.1-dataframe-joiner/data/games.rds")
 games = as.data.table(games)
 
 # ==============================================================================
-# RECODE VALUES
+# Rename VALUES
 # ==============================================================================
-games[Type == "Genre",      Value := RecodeGenre(Value),      ]
-games[Type == "Platform",   Value := RecodePlatform(Value),   ]
-games[Type == "RatingESRB", Value := RecodeRatingESRB(Value), ]
+games[Type == "Genre",      Value := RenameGenre(Value),      ]
+games[Type == "Platform",   Value := RenamePlatform(Value),   ]
+games[Type == "RatingESRB", Value := RenameRatingESRB(Value), ]
 games = unique(games)
 
 # ==============================================================================

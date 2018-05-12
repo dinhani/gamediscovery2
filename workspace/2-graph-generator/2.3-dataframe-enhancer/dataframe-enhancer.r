@@ -14,7 +14,7 @@ source("functions/GenerateRowsMatchingGameName.r", encoding = "UTF-8")
 # ==============================================================================
 # READ GAMES
 # ==============================================================================
-games = readRDS("../2.2-dataframe-recoder/data/games.rds")
+games = readRDS("../2.2-dataframe-renamer/data/games.rds")
 games = as.data.table(games)
 
 # ==============================================================================

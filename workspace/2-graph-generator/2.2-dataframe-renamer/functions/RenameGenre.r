@@ -1,4 +1,4 @@
-RecodeGenre = function(genres){
+RenameGenre = function(genres){
     genres = str_replace(genres, "( game| video game)", "") %>%
         str_title_case()
 

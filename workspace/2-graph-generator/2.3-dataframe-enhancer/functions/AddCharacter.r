@@ -8,7 +8,7 @@ AddCharacter = function(games){
   characters = c(characters, "Goku", "Vegeta")
 
   # Marvel / DC
-  characters = c(characters, "Batman", "Captain America", "Catwoman", "Deadpool", "Hulk", "Iron Man", "Joker", "Robin" "Spider-Man", "Superman", "Venom", "Wolverine")
+  characters = c(characters, "Batman", "Captain America", "Catwoman", "Deadpool", "Hulk", "Iron Man", "Joker", "Robin", "Spider-Man", "Superman", "Venom", "Wolverine")
 
   # Gods
   characters = c(characters, "Hercules", "Thor", "Zeus")
