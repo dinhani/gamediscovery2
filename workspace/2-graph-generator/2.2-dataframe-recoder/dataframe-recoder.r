@@ -19,8 +19,8 @@ games = as.data.table(games)
 # ==============================================================================
 # RECODE VALUES
 # ==============================================================================
-games[Type == "Genre",      Value := RecodeGenre(Value), ]
-games[Type == "Platform",   Value := RecodePlatform(Value), ]
+games[Type == "Genre",      Value := RecodeGenre(Value),      ]
+games[Type == "Platform",   Value := RecodePlatform(Value),   ]
 games[Type == "RatingESRB", Value := RecodeRatingESRB(Value), ]
 games = unique(games)
 

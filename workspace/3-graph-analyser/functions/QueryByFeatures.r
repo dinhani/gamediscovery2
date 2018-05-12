@@ -1,13 +1,12 @@
 QueryByFeatures = function(g, features){
-    # query nearest vertices games and features
-    nearest.vertices.ids = lapply(features, FUN=ego, g=g, order=2)
-    nearest.vertices.ids = lapply(nearest.vertices.ids, FUN='[[', 1)
+    # query all games that have the requested features
+    games.ids.list = lapply(features, FUN=ego, g=g, order=1) # `ego` get the features neighbors
+    games.ids.list = lapply(games.ids.list, FUN='[[', 1)     # `[[` extracts the vector from the `ego` result list
 
-    # keep vertices that appear for all features (intersect)
-    nearest.vertices.ids = reduce(nearest.vertices.ids, intersect)
-    nearest.vertices.ids = as.numeric(as.character(nearest.vertices.ids))
+    # keep the games that appears for all requested features
+    games.ids = reduce(games.ids.list, intersect)
 
     # extract vertices that are games from graph
-    nearest.vertices = V(g)[nearest.vertices.ids]
-    nearest.vertices[nearest.vertices$Type == "Game"]
+    games.vertices = V(g)[games.ids]
+    games.vertices[games.vertices$Type == "Game"]
 }

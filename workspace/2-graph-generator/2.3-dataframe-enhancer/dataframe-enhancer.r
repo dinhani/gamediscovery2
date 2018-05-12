@@ -6,6 +6,7 @@ source("../../libraries.r", encoding = "UTF-8")
 # ==============================================================================
 # FUNCTIONS
 # ==============================================================================
+source("functions/EnhanceWeight.r", encoding = "UTF-8")
 source("functions/EnhanceYear.r", encoding = "UTF-8")
 
 # ==============================================================================
@@ -17,7 +18,8 @@ games = as.data.table(games)
 # ==============================================================================
 # ENHANCE VALUES
 # ==============================================================================
-games[Type == "Year", Value := EnhanceYear(Value), ]
+games[              , Weight := EnhanceWeight(Type),  ]
+games[Type == "Year", Value  := EnhanceYear(Value),   ]
 
 # ==============================================================================
 # SAVE GAMES

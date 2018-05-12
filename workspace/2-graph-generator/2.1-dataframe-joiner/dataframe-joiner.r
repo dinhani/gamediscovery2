@@ -70,7 +70,8 @@ games = games.wikidata %>%
   mutate(
     Remove = Type %in% c("GameMode", "Genre", "Platform") && n() < 30
   ) %>%
-  filter(Remove == FALSE)
+  filter(Remove == FALSE) %>%
+  select(ID, Name, Type, Value)
 
 # ==============================================================================
 # SAVE GAMES

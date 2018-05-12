@@ -52,11 +52,8 @@ graph.vertices = graph.vertices.games %>%
 
 # EDGES
 graph.edges = games %>%
-  select(ID, TypeID) %>%
-  distinct() %>%
-  mutate(
-    Weight = 1
-  )
+  select(ID, TypeID, Weight) %>%
+  distinct()
 
 # GRAPH
 graph = graph_from_data_frame(graph.edges, vertices = graph.vertices, directed = FALSE)
