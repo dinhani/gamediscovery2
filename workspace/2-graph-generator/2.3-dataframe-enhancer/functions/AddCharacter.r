@@ -1,3 +1,6 @@
+# ==============================================================================
+# Identify and add characters to the existing games
+# ==============================================================================
 AddCharacter <- function(games) {
   # ============================================================================
   # CATEGORIES TO FIND
@@ -6,10 +9,8 @@ AddCharacter <- function(games) {
 
   # Dragon Ball
   characters <- c(characters, "Goku", "Vegeta")
-
   # Marvel / DC
   characters <- c(characters, "Batman", "Captain America", "Catwoman", "Deadpool", "Hulk", "Iron Man", "Joker", "Robin", "Spider-Man", "Superman", "Venom", "Wolverine")
-
   # Gods
   characters <- c(characters, "Hercules", "Thor", "Zeus")
 

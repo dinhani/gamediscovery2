@@ -1,3 +1,7 @@
+# ==============================================================================
+# Identity keywords in game names and texts and generate new rows for the found
+# values
+# ==============================================================================
 GenerateRowsMatchingGameName <- function(games, type, values) {
   # games basic info to filter quickly
   games.to.filter <- unique(games[, .(ID, Name), ])

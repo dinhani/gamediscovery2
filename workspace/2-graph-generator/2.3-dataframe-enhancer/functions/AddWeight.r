@@ -1,3 +1,6 @@
+# ==============================================================================
+# Set the weight of each type to be used in the recommendations
+# ==============================================================================
 AddWeight <- function(games) {
   NONE        <- 0
   MEDIUM      <- 1

@@ -1,3 +1,6 @@
+# ==============================================================================
+# Merge two or more lists of vectors into a single list of vectors
+# ==============================================================================
 MergeColumns <- function(...) {
   apply(
     cbind(...),

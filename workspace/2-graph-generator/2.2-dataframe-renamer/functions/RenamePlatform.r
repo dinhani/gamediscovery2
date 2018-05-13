@@ -1,3 +1,6 @@
+# ==============================================================================
+# Rename the Platform values
+# ==============================================================================
 RenamePlatform <- function(platforms) {
   platforms <- str_replace(platforms, "Sega", "SEGA")
 
