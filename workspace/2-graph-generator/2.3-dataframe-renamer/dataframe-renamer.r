@@ -13,7 +13,7 @@ source("functions/RenameRating.r", encoding = "UTF-8")
 # ==============================================================================
 # READ GAMES
 # ==============================================================================
-games <- readRDS("../2.1-dataframe-joiner/data/games.rds")
+games <- readRDS("../2.2-dataframe-text-processor/data/games.rds")
 games$Attributes <- as.data.table(games$Attributes)
 
 # ==============================================================================

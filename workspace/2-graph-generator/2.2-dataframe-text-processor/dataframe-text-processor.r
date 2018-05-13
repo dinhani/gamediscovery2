@@ -6,20 +6,7 @@ source("../../libraries.r", encoding = "UTF-8")
 # ==============================================================================
 # READ GAMES
 # ==============================================================================
-games <- readRDS("../2.3-dataframe-enhancer/data/games.rds")
-
-# ==============================================================================
-# DISCARD VALUES
-# ==============================================================================
-games$Attributes <- games$Attributes %>%
-  group_by(Type, Value) %>%
-  mutate(
-    Remove = Type %in% c("GameMode", "Genre", "Platform") && n() < 30
-  ) %>%
-  filter(Remove == FALSE) %>%
-  select(ID, Name, Type, Value, Weight) %>%
-  ungroup() %>%
-  distinct()
+games <- readRDS("../2.1-dataframe-joiner/data/games.rds")
 
 # ==============================================================================
 # SAVE GAMES

@@ -1,32 +1,27 @@
 # ==============================================================================
 # LIBRARIES
 # ==============================================================================
-source("../libraries.r", encoding = "UTF-8")
-library(igraph)
-
-# ==============================================================================
-# FUNCTIONS
-# ==============================================================================
-source("functions/QueryByGame.r", encoding = "UTF-8")
-source("functions/QueryByFeatures.r", encoding = "UTF-8")
-source("functions/QueryByGameAndFeatures.r", encoding = "UTF-8")
+source("../../libraries.r", encoding = "UTF-8")
 
 # ==============================================================================
 # READ GAMES
 # ==============================================================================
-g <- readRDS("../2-graph-generator/2.6-dataframe-to-graph/data/graph.rds")
-g.es <- E(g)
+games <- readRDS("../2.4-dataframe-enhancer/data/games.rds")
 
 # ==============================================================================
-# EXAMPLE QUERIES
+# DISCARD VALUES
 # ==============================================================================
-game <- "game-binary-domain"
-QueryByGame(g, g.es, game)
-ego(g, 1, game)
+games$Attributes <- games$Attributes %>%
+  group_by(Type, Value) %>%
+  mutate(
+    Remove = Type %in% c("GameMode", "Genre", "Platform") && n() < 30
+  ) %>%
+  filter(Remove == FALSE) %>%
+  select(ID, Name, Type, Value, Weight) %>%
+  ungroup() %>%
+  distinct()
 
-features <- c("platform-playstation-2")
-QueryByFeatures(g, features)
-
-QueryByGameAndFeatures(g, g.es, game, features)
-
-
+# ==============================================================================
+# SAVE GAMES
+# ==============================================================================
+saveRDS(games, file = "data/games.rds")
