@@ -1,24 +1,24 @@
 # ==============================================================================
 # Set the weight of each type to be used in the recommendations
 # ==============================================================================
-AddWeight <- function(games) {
+SetWeight <- function(games.attributes) {
   NONE        <- 0
   MEDIUM      <- 1
   MEDIUM_HIGH <- 2
   HIGH        <- 4
   HIGHEST     <- 8
 
-  games[
+  games.attributes[
     ,
     Weight := recode(Type,
       # HIGHEST
       "Genre"     = HIGHEST,
       "Setting"   = HIGHEST,
-      "Mechanics" = HIGHEST,
+      "Mechanic"  = HIGHEST,
 
       # HIGH
       "Graphics"  = HIGH,
-      "Character" = HIGH,
+      "Characte"  = HIGH,
       "Sport"     = HIGH,
       "Vehicle"   = HIGH,
 

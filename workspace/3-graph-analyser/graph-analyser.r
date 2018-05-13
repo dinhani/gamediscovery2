@@ -20,11 +20,11 @@ g.es <- E(g)
 # ==============================================================================
 # EXAMPLE QUERIES
 # ==============================================================================
-game <- "game-binary-domain"
+game <- "game-mass-effect-3"
 QueryByGame(g, g.es, game)
 ego(g, 1, game)
 
-features <- c("platform-playstation-2")
+features <- c("platform-playstation-4", "mechanics-squad")
 QueryByFeatures(g, features)
 
 QueryByGameAndFeatures(g, g.es, game, features)

@@ -6,10 +6,11 @@ source("../../libraries.r", encoding = "UTF-8")
 # ==============================================================================
 # FUNCTIONS
 # ==============================================================================
-source("functions/AddCharacter.r", encoding = "UTF-8")
-source("functions/AddWeight.r", encoding = "UTF-8")
-source("functions/AddYear.r", encoding = "UTF-8")
-source("functions/GenerateRowsMatchingGameName.r", encoding = "UTF-8")
+source("functions/IdentifyValues.r", encoding = "UTF-8")
+source("functions/IdentifyCharacter.r", encoding = "UTF-8")
+source("functions/IdentifyMechanic.r", encoding = "UTF-8")
+source("functions/SetYear.r", encoding = "UTF-8")
+source("functions/SetWeight.r", encoding = "UTF-8")
 
 # ==============================================================================
 # READ GAMES
@@ -20,9 +21,10 @@ games$Attributes <- as.data.table(games$Attributes)
 # ==============================================================================
 # ENHANCE VALUES
 # ==============================================================================
-games$Attributes <- AddCharacter(games$Attributes)
-games$Attributes <- AddYear(games$Attributes)
-games$Attributes <- AddWeight(games$Attributes)
+games$Attributes <- rbind(games$Attributes, IdentifyCharacter(games$Texts))
+games$Attributes <- rbind(games$Attributes, IdentifyMechanic(games$Texts))
+games$Attributes <- SetYear(games$Attributes)
+games$Attributes <- SetWeight(games$Attributes)
 
 games$Attributes <- unique(games$Attributes)
 
