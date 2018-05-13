@@ -1,21 +1,21 @@
-AddCharacter = function(games){
+AddCharacter <- function(games) {
   # ============================================================================
   # CATEGORIES TO FIND
   # ============================================================================
-  characters = c()
+  characters <- c()
 
   # Dragon Ball
-  characters = c(characters, "Goku", "Vegeta")
+  characters <- c(characters, "Goku", "Vegeta")
 
   # Marvel / DC
-  characters = c(characters, "Batman", "Captain America", "Catwoman", "Deadpool", "Hulk", "Iron Man", "Joker", "Robin", "Spider-Man", "Superman", "Venom", "Wolverine")
+  characters <- c(characters, "Batman", "Captain America", "Catwoman", "Deadpool", "Hulk", "Iron Man", "Joker", "Robin", "Spider-Man", "Superman", "Venom", "Wolverine")
 
   # Gods
-  characters = c(characters, "Hercules", "Thor", "Zeus")
+  characters <- c(characters, "Hercules", "Thor", "Zeus")
 
   # ============================================================================
   # FIND CHARACTERS
   # ============================================================================
-  characters.rows = GenerateRowsMatchingGameName(games, "Character", characters)
+  characters.rows <- GenerateRowsMatchingGameName(games, "Character", characters)
   rbind(games, characters.rows)
 }
