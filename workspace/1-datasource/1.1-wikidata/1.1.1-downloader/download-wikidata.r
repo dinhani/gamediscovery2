@@ -48,6 +48,7 @@ DownloadRelationshipsOfGames("Theme", "wdt:P921")
 
 DownloadRelationshipsOfGames("ESRB", "wdt:P852")
 DownloadRelationshipsOfGames("PEGI", "wdt:P908")
+DownloadRelationshipsOfGames("USK", "wdt:P914")
 
 DownloadRelationshipsOfGames("IMDB", "wdt:P345")
 DownloadRelationshipsOfGames("Metacritic", "wdt:P1712")

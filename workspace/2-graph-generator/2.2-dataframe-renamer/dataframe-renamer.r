@@ -8,7 +8,7 @@ source("../../libraries.r", encoding = "UTF-8")
 # ==============================================================================
 source("functions/RenameGenre.r", encoding = "UTF-8")
 source("functions/RenamePlatform.r", encoding = "UTF-8")
-source("functions/RenameRatingESRB.r", encoding = "UTF-8")
+source("functions/RenameRating.r", encoding = "UTF-8")
 
 # ==============================================================================
 # READ GAMES
@@ -21,7 +21,7 @@ games <- as.data.table(games)
 # ==============================================================================
 games[Type == "Genre", Value := RenameGenre(Value), ]
 games[Type == "Platform", Value := RenamePlatform(Value), ]
-games[Type == "RatingESRB", Value := RenameRatingESRB(Value), ]
+games[Type == "Rating", Value := RenameRating(Value), ]
 
 games <- unique(games)
 

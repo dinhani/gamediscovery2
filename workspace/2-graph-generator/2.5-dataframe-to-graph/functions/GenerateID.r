@@ -5,5 +5,6 @@ GenerateID <- function(type, id) {
   paste(type, id, sep = "-") %>%
     str_to_lower() %>%
     str_replace_all("\\s+", "-") %>%
-    str_replace_all("[^a-z0-9-]", "")
+    str_replace_all("[^a-z0-9-]", "") %>%
+    str_replace_all("-+", "-")
 }

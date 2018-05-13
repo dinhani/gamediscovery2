@@ -1,44 +1,33 @@
 AddWeight <- function(games) {
-  LOW <- 1
-  MEDIUM <- 2
-  MEDIUM_HIGH <- 3
-  HIGH <- 4
-  HIGHEST <- 5
+  NONE        <- 0
+  MEDIUM      <- 1
+  MEDIUM_HIGH <- 2
+  HIGH        <- 4
+  HIGHEST     <- 8
 
   games[
     ,
     Weight := recode(Type,
-      # INDUSTRY
-      "Developer" = HIGH,
-      "Person" = MEDIUM_HIGH,
-      "Platform" = MEDIUM_HIGH,
-      "Publisher" = MEDIUM,
-      "RatingESRB" = MEDIUM,
-      "RatingPEGI" = MEDIUM,
-      "RatingFeature" = MEDIUM_HIGH,
-      "Series" = HIGHEST,
-      "Year" = LOW,
+      # HIGHEST
+      "Genre"     = HIGHEST,
+      "Setting"   = HIGHEST,
+      "Mechanics" = HIGHEST,
 
-      # GAMEPLAY
-      "Duration" = LOW,
-      "Engine" = MEDIUM,
-      "GameMode" = MEDIUM,
-      "Genre" = HIGHEST,
-      "Graphics" = HIGH,
-      "Mechanics" = HIGH,
+      # HIGH
+      "Graphics"  = HIGH,
+      "Character" = HIGH,
+      "Sport"     = HIGH,
+      "Vehicle"   = HIGH,
 
-      # PLOT
-      "Atmosphere" = MEDIUM_HIGH,
-      "Character" = HIGHEST,
-      "Creature" = HIGH,
-      "Location" = MEDIUM_HIGH,
-      "Organization" = MEDIUM_HIGH,
-      "Period" = MEDIUM_HIGH,
-      "Soundtrack" = MEDIUM,
-      "SportTeam" = MEDIUM_HIGH,
-      "Theme" = HIGH,
-      "Vehicle" = MEDIUM_HIGH,
-      "Weapon" = MEDIUM_HIGH
+      # MEDIUM HIGH
+      "Rating"    = MEDIUM_HIGH,
+
+      # MEDIUM
+      "Developer" = MEDIUM,
+      "Person"    = MEDIUM,
+
+      # NONE
+      .default = NONE
     ),
   ][]
 }

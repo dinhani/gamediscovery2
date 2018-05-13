@@ -1,15 +1,13 @@
 MergeColumns <- function(...) {
-  merged <- apply(
+  apply(
     cbind(...),
     MARGIN = 1,
-    FUN = MergeColumns.process
+    FUN = function(v) {
+      v <- sort(unique(unlist(v)))
+      if (is.logical(v)) {
+        return(NULL)
+      }
+      return(v)
+    }
   )
-}
-
-MergeColumns.process <- function(v) {
-  v <- sort(unique(unlist(v)))
-  if (is.logical(v)) {
-    return(NULL)
-  }
-  return(v)
 }

@@ -1,6 +1,6 @@
 echo "DataFrame Joiner"
 cd 2.1-dataframe-joiner
-Rscript dataframe-joiner.r > NUL
+Rscript dataframe-joiner.r
 
 echo "DataFrame Renamer"
 cd ..
