@@ -62,15 +62,7 @@ games <- games.wikidata %>%
 
   # remove rows with null values
   filter(sapply(Value, negate(is.null))) %>%
-  unnest() %>%
-
-  # remove values with insignificant number of ocurrences
-  group_by(Type, Value) %>%
-  mutate(
-    Remove = Type %in% c("GameMode", "Genre", "Platform") && n() < 30
-  ) %>%
-  filter(Remove == FALSE) %>%
-  select(ID, Name, Type, Value)
+  unnest()
 
 # ==============================================================================
 # SAVE GAMES
