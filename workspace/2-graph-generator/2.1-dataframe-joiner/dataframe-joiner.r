@@ -35,7 +35,7 @@ games <- games.wikidata %>%
     Series = WD_SeriesLabel,
     Year = WD_ReleaseDateLabel,
 
-    # GAMEPLAY
+    # GAMEPLAY  
     Duration = NULL,
     Engine = WD_EngineLabel,
     GameMode = WD_GameModeLabel,

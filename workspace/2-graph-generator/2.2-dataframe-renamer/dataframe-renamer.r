@@ -22,6 +22,7 @@ games <- as.data.table(games)
 games[Type == "Genre", Value := RenameGenre(Value), ]
 games[Type == "Platform", Value := RenamePlatform(Value), ]
 games[Type == "RatingESRB", Value := RenameRatingESRB(Value), ]
+
 games <- unique(games)
 
 # ==============================================================================

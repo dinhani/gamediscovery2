@@ -11,13 +11,15 @@ games <- readRDS("../2.3-dataframe-enhancer/data/games.rds")
 # ==============================================================================
 # DISCARD VALUES
 # ==============================================================================
-games <- games
+games <- games %>%
   group_by(Type, Value) %>%
   mutate(
     Remove = Type %in% c("GameMode", "Genre", "Platform") && n() < 30
   ) %>%
   filter(Remove == FALSE) %>%
-  select(ID, Name, Type, Value)
+  select(ID, Name, Type, Value, Weight) %>%
+  ungroup() %>%
+  distinct()
 
 # ==============================================================================
 # SAVE GAMES

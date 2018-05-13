@@ -13,7 +13,7 @@ source("functions/QueryByGame.r", encoding = "UTF-8")
 # ==============================================================================
 # READ GAMES
 # ==============================================================================
-g <- readRDS("../2-graph-generator/2.4-dataframe-to-graph/data/graph.rds")
+g <- readRDS("../2-graph-generator/2.5-dataframe-to-graph/data/graph.rds")
 g.es <- E(g)
 
 # ==============================================================================
