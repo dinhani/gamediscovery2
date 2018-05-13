@@ -1,3 +1,6 @@
+# ==============================================================================
+# Query the game graph for games similar to the requested game
+# ==============================================================================
 QueryByGame <- function(g, g.es, game) {
 
   # get features connected to the requested game

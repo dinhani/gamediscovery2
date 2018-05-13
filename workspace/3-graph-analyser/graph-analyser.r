@@ -7,8 +7,9 @@ library(igraph)
 # ==============================================================================
 # FUNCTIONS
 # ==============================================================================
-source("functions/QueryByFeatures.r", encoding = "UTF-8")
 source("functions/QueryByGame.r", encoding = "UTF-8")
+source("functions/QueryByFeatures.r", encoding = "UTF-8")
+source("functions/QueryByGameAndFeatures.r", encoding = "UTF-8")
 
 # ==============================================================================
 # READ GAMES
@@ -23,5 +24,9 @@ game <- "game-binary-domain"
 QueryByGame(g, g.es, game)
 ego(g, 1, game)
 
-features <- c("platform-playstation-2", "platform-playstation-3", "genre-action")
+features <- c("platform-playstation-2")
 QueryByFeatures(g, features)
+
+QueryByGameAndFeatures(g, g.es, game, features)
+
+
