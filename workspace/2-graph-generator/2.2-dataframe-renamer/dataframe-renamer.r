@@ -14,16 +14,16 @@ source("functions/RenameRating.r", encoding = "UTF-8")
 # READ GAMES
 # ==============================================================================
 games <- readRDS("../2.1-dataframe-joiner/data/games.rds")
-games <- as.data.table(games)
+games$Attributes <- as.data.table(games$Attributes)
 
 # ==============================================================================
 # Rename VALUES
 # ==============================================================================
-games[Type == "Genre", Value := RenameGenre(Value), ]
-games[Type == "Platform", Value := RenamePlatform(Value), ]
-games[Type == "Rating", Value := RenameRating(Value), ]
+games$Attributes[Type == "Genre", Value := RenameGenre(Value), ]
+games$Attributes[Type == "Platform", Value := RenamePlatform(Value), ]
+games$Attributes[Type == "Rating", Value := RenameRating(Value), ]
 
-games <- unique(games)
+games$Attributes <- unique(games$Attributes)
 
 # ==============================================================================
 # SAVE GAMES

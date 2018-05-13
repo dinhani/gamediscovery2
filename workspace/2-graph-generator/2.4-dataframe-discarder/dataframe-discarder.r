@@ -11,7 +11,7 @@ games <- readRDS("../2.3-dataframe-enhancer/data/games.rds")
 # ==============================================================================
 # DISCARD VALUES
 # ==============================================================================
-games <- games %>%
+games$Attributes <- games$Attributes %>%
   group_by(Type, Value) %>%
   mutate(
     Remove = Type %in% c("GameMode", "Genre", "Platform") && n() < 30

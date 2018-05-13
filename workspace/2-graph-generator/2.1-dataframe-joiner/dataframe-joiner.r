@@ -17,7 +17,7 @@ games.mobygames <- readRDS("../../1-datasource/1.2-mobygames/1.2.2-parser/data/g
 # ==============================================================================
 # JOIN GAMES
 # ==============================================================================
-games <- games.wikidata %>%
+games.attributes <- games.wikidata %>%
   left_join(games.mobygames, by = c("WD_GameID" = "MB_GameID")) %>%
   transmute(
     # BASIC
@@ -62,7 +62,16 @@ games <- games.wikidata %>%
   filter(sapply(Value, negate(is.null))) %>%
   unnest()
 
+games.texts = games.attributes %>%
+  inner_join(games.mobygames, by = c("ID" = "MB_GameID")) %>%
+  mutate(
+    Description = MB_Description
+  ) %>%
+  select(ID, Name, Description) %>%
+  distinct()
+
 # ==============================================================================
 # SAVE GAMES
 # ==============================================================================
+games = list(Attributes = games.attributes, Texts = games.texts)
 saveRDS(games, file = "data/games.rds")

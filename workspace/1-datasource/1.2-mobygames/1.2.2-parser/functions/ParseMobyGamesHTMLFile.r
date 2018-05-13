@@ -10,24 +10,32 @@ ParseMobyGamesHTMLFile <- function(filename) {
   html <- read_html(filename)
 
   # parse release and genre
-  df.release <- ParseMobyGamesSection(html, "#coreGameRelease div")
-  df.genre <- ParseMobyGamesSection(html, "#coreGameGenre div div")
+  game.release <- ParseMobyGamesSection(html, "#coreGameRelease div")
+  game.genre <- ParseMobyGamesSection(html, "#coreGameGenre div div")
 
   # check which dataframe have data
-  if (is.data.frame(df.release) && is.data.frame(df.genre)) {
-    df <- cbind(df.release, df.genre)
-  } else if (is.data.frame(df.release)) {
-    df <- df.release
-  } else if (is.data.frame(df.genre)) {
-    df <- df.genre
+  if (is.data.frame(game.release) && is.data.frame(game.genre)) {
+    game.df <- cbind(game.release, game.genre)
+  } else if (is.data.frame(game.release)) {
+    game.df <- game.release
+  } else if (is.data.frame(game.genre)) {
+    game.df <- game.genre
   } else {
     return(NULL)
   }
 
-  # generate final dataframe
-  data.frame(GameID = game.id, df, stringsAsFactors = FALSE)
-}
+  # parse description
+  game.description = html %>% html_node(css = ".col-md-8.col-lg-8") %>% html_text() %>% str_replace_all("\n", " ")
+  game.description = str_extract(game.description, "(?<=\\?Description).+(?=\\[edit description)")
 
+  # generate final dataframe
+  data.frame(
+    GameID = game.id,
+    game.df,
+    Description = game.description,
+    stringsAsFactors = FALSE
+  )
+}
 ParseMobyGamesHTMLFile <- possibly(ParseMobyGamesHTMLFile, otherwise = NULL)
 
 ParseMobyGamesSection <- function(html, selector) {

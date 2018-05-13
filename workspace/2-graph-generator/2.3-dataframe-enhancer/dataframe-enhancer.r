@@ -15,16 +15,16 @@ source("functions/GenerateRowsMatchingGameName.r", encoding = "UTF-8")
 # READ GAMES
 # ==============================================================================
 games <- readRDS("../2.2-dataframe-renamer/data/games.rds")
-games <- as.data.table(games)
+games$Attributes <- as.data.table(games$Attributes)
 
 # ==============================================================================
 # ENHANCE VALUES
 # ==============================================================================
-games <- AddCharacter(games)
-games <- AddYear(games)
-games <- AddWeight(games)
+games$Attributes <- AddCharacter(games$Attributes)
+games$Attributes <- AddYear(games$Attributes)
+games$Attributes <- AddWeight(games$Attributes)
 
-games <- unique(games)
+games$Attributes <- unique(games$Attributes)
 
 # ==============================================================================
 # SAVE GAMES
