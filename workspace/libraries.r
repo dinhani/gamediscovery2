@@ -15,6 +15,7 @@ library(zoo)
 library(xts)
 
 # Strings
+library(tm)
 library(stringr)
 library(lettercase)
 

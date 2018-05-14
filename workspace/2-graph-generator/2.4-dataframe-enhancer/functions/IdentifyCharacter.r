@@ -1,7 +1,7 @@
 # ==============================================================================
 # Identify characters of the existing games
 # ==============================================================================
-IdentifyCharacter <- function(games.texts) {
+IdentifyCharacter <- function(games.texts, games.tdm) {
   # CHARACTERS
   characters <- c()
   characters <- c(characters, "Goku", "Vegeta")
@@ -9,5 +9,5 @@ IdentifyCharacter <- function(games.texts) {
   characters <- c(characters, "Hercules", "Thor", "Zeus")
 
   # IDENTIFY
-  IdentifyValues(games.texts, "Character", characters)
+  IdentifyValues(games.texts, games.tdm, "Character", characters)
 }

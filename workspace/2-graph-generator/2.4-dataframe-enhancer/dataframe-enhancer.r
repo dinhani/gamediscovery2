@@ -21,8 +21,8 @@ games$Attributes <- as.data.table(games$Attributes)
 # ==============================================================================
 # ENHANCE VALUES
 # ==============================================================================
-games$Attributes <- rbind(games$Attributes, IdentifyCharacter(games$Texts))
-games$Attributes <- rbind(games$Attributes, IdentifyMechanic(games$Texts))
+games$Attributes <- rbind(games$Attributes, IdentifyCharacter(games$Texts, games$TDM))
+games$Attributes <- rbind(games$Attributes, IdentifyMechanic(games$Texts, games$TDM))
 games$Attributes <- SetYear(games$Attributes)
 games$Attributes <- SetWeight(games$Attributes)
 

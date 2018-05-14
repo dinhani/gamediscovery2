@@ -2,27 +2,21 @@
 # Identity keywords in game names and texts and generate new rows for the found
 # values
 # ==============================================================================
-IdentifyValues <- function(games.texts, type, values) {
+IdentifyValues <- function(games.texts, games.tdm, type, values) {
   games.texts = as.data.table(games.texts)
 
-  # identify values in game title
-  identified.bytitle <- lapply(values, function(value) {
-    games.texts[
-      str_detect(games.texts$Name, value),
-      .(ID, Name, Type = type, Value = value),
-    ]
-  }) %>%
-    rbindlist()
-
   # identify values in game text
-  identified.bytext <- lapply(values, function(value){
+  lapply(values, function(value){
+    # find documents where value appear
+    games.scores <- tm_term_score(games.tdm, tolower(value))
+    games.scores <- games.scores[games.scores >= 2]
+    games.rows   <- as.numeric(names(games.scores))
+    
+    # filter games by the scores found
     games.texts[
-      str_detect(games.texts$Description, value),
+      games.rows,
       .(ID, Name, Type = type, Value = value),
-    ]
+      ]
   }) %>%
     rbindlist()
-
-  # join identified values
-  unique(rbind(identified.bytitle, identified.bytext))
 }
