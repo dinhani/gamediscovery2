@@ -19,8 +19,10 @@ games.corpus <- games$Texts$Description %>%
 
 games.corpus <- games.corpus %>%
   tm_map(content_transformer(tolower)) %>%
+  tm_map(content_transformer(str_replace_all), pattern = "[[:punct:]]", replacement = " ") %>%
   tm_map(removeWords, stopwords("en")) %>%
-  tm_map(content_transformer(function(x) iconv(x, to = "ASCII//TRANSLIT")))
+  tm_map(content_transformer(function(x) iconv(x, to = "ASCII//TRANSLIT"))) %>%
+  tm_map(stripWhitespace)
 
 games.tdm <- TermDocumentMatrix(games.corpus,
   control = list(
