@@ -16,6 +16,7 @@ library(xts)
 
 # Strings
 library(tm)
+library(qdap)
 library(stringr)
 library(lettercase)
 
