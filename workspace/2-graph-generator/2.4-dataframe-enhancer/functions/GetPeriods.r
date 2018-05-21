@@ -1,12 +1,15 @@
 # ==============================================================================
-# Soundtracks to be identified
+# Periods to be identified
 # ==============================================================================
-GetSoundstracks <- function() {
+GetPeriods <- function() {
   values <- c(
-    "Heavy Metal",
-    "Hip hop",
-    "Orchestral",
-    "Rap"
+    "Autumn",
+    "Future",
+    "Past",
+    "Prehistory",
+    "Spring",
+    "Summer",
+    "Winter"
   )
 
   return(values)
