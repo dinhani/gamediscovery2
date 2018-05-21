@@ -11,12 +11,13 @@ IdentifyValues <- function(games.texts, games.tdm, type, values) {
     games.scores <- tm_term_score(games.tdm, tolower(value))
     games.scores <- games.scores[games.scores >= 2]
     games.rows   <- as.numeric(names(games.scores))
-    
+
     # filter games by the scores found
     games.texts[
       games.rows,
       .(ID, Name, Type = type, Value = value),
       ]
   }) %>%
-    rbindlist()
+    rbindlist() %>%
+    unique()
 }

@@ -7,8 +7,9 @@ source("../../libraries.r", encoding = "UTF-8")
 # FUNCTIONS
 # ==============================================================================
 source("functions/IdentifyValues.r", encoding = "UTF-8")
-source("functions/IdentifyCharacter.r", encoding = "UTF-8")
-source("functions/IdentifyMechanic.r", encoding = "UTF-8")
+source("functions/GetCharacters.r", encoding = "UTF-8")
+source("functions/GetCreatures.r", encoding = "UTF-8")
+source("functions/GetMechanics.r", encoding = "UTF-8")
 source("functions/SetYear.r", encoding = "UTF-8")
 source("functions/SetWeight.r", encoding = "UTF-8")
 
@@ -21,8 +22,9 @@ games$Attributes <- as.data.table(games$Attributes)
 # ==============================================================================
 # ENHANCE VALUES
 # ==============================================================================
-games$Attributes <- rbind(games$Attributes, IdentifyCharacter(games$Texts, games$TDM))
-games$Attributes <- rbind(games$Attributes, IdentifyMechanic(games$Texts, games$TDM))
+games$Attributes <- IdentifyValues(games$Texts, games$TDM, "Character", GetCharacters()) %>% rbind(games$Attributes)
+games$Attributes <- IdentifyValues(games$Texts, games$TDM, "Creature",  GetCreatures())  %>% rbind(games$Attributes)
+games$Attributes <- IdentifyValues(games$Texts, games$TDM, "Mechanic",  GetMechanics())  %>% rbind(games$Attributes)
 games$Attributes <- SetYear(games$Attributes)
 games$Attributes <- SetWeight(games$Attributes)
 

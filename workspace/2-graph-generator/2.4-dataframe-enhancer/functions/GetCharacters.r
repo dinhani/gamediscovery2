@@ -1,7 +1,7 @@
 # ==============================================================================
-# Identify characters of the existing games
+# Characters to be identified
 # ==============================================================================
-IdentifyCharacter <- function(games.texts, games.tdm) {
+GetCharacters <- function() {
   characters <- c()
   # Anime
   characters <- c(characters, "Gohan", "Goku", "Vegeta")
@@ -16,6 +16,5 @@ IdentifyCharacter <- function(games.texts, games.tdm) {
   # Marvel / DC
   characters <- c(characters, "Batman", "Captain America", "Catwoman", "Deadpool", "Hulk", "Iron Man", "Joker", "Robin", "Spider-Man", "Superman", "Thanos", "Venom", "Wolverine")
 
-  # IDENTIFY
-  IdentifyValues(games.texts, games.tdm, "Character", characters)
+  return(characters)
 }

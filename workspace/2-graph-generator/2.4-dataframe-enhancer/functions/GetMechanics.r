@@ -1,10 +1,8 @@
 # ==============================================================================
-# Identify game mechanics of the existing games
+# Mechanics to be identified
 # ==============================================================================
-IdentifyMechanic <- function(games.texts, games.tdm) {
-  # MECHANICS
+GetMechanics <- function() {
   mechanics = c("bullet-time", "squad")
 
-  # IDENTIFY
-  IdentifyValues(games.texts, games.tdm, "Mechanics", mechanics)
+  return(mechanics)
 }
