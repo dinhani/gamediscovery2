@@ -1,8 +1,8 @@
 # ==============================================================================
-# Mechanics to be identified
+# Soundtracks to be identified
 # ==============================================================================
-GetMechanics <- function() {
-  values = c("bullet-time", "squad")
+GetSoundstracks <- function() {
+  values <- c("Heavy Metal", "Hip hop", "Orchestral", "Rap")
 
   return(values)
 }

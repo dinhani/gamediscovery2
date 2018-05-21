@@ -2,19 +2,19 @@
 # Characters to be identified
 # ==============================================================================
 GetCharacters <- function() {
-  characters <- c()
+  values <- c()
   # Anime
-  characters <- c(characters, "Gohan", "Goku", "Vegeta")
+  values <- c(values, "Gohan", "Goku", "Vegeta")
   # Disney
-  characters <- c(characters, "Donald Duck", "Mickey", "Pinocchio")
+  values <- c(values, "Donald Duck", "Mickey", "Pinocchio")
   # Games
-  characters <- c(characters, "Gordon Freeman", "Kratos", "Lara Croft", "Master Chief", "Pac Man", "Sonic", "Yoshi")
+  values <- c(values, "Gordon Freeman", "Kratos", "Lara Croft", "Master Chief", "Pac Man", "Sonic", "Yoshi")
   # Gods
-  characters <- c(characters, "Anubis", "Aphrodite", "Apollo", "Ares", "Artemis", "Athena", "Cronos", "Hades", "Helios", "Hercules", "Odin", "Osiris", "Poseidon", "Thor", "Xena", "Zeus")
+  values <- c(values, "Anubis", "Aphrodite", "Apollo", "Ares", "Artemis", "Athena", "Cronos", "Hades", "Helios", "Hercules", "Odin", "Osiris", "Poseidon", "Thor", "Xena", "Zeus")
   # Historical
-  characters <- c(characters, "Archimedes", "Einstein",  "Hitler", "Julius Caesar", "Leonidas", "Socrates", "Tesla")
+  values <- c(values, "Archimedes", "Einstein",  "Hitler", "Julius Caesar", "Leonidas", "Socrates", "Tesla")
   # Marvel / DC
-  characters <- c(characters, "Batman", "Captain America", "Catwoman", "Deadpool", "Hulk", "Iron Man", "Joker", "Robin", "Spider-Man", "Superman", "Thanos", "Venom", "Wolverine")
+  values <- c(values, "Batman", "Captain America", "Catwoman", "Deadpool", "Hulk", "Iron Man", "Joker", "Robin", "Spider-Man", "Superman", "Thanos", "Venom", "Wolverine")
 
-  return(characters)
+  return(values)
 }
