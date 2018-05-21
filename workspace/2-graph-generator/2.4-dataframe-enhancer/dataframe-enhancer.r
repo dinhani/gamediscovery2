@@ -35,7 +35,7 @@ games$Attributes <- IdentifyValues(games$Texts, games$TDM, "Creature",     GetCr
 games$Attributes <- IdentifyValues(games$Texts, games$TDM, "Mechanic",     GetMechanics())     %>% rbind(games$Attributes)
 games$Attributes <- IdentifyValues(games$Texts, games$TDM, "Organization", GetOrganizations()) %>% rbind(games$Attributes)
 games$Attributes <- IdentifyValues(games$Texts, games$TDM, "Setting",      GetLocations())     %>% rbind(games$Attributes)
-games$Attributes <- IdentifyValues(games$Texts, games$TDM, "Setting",      GetPeriods())     %>% rbind(games$Attributes)
+games$Attributes <- IdentifyValues(games$Texts, games$TDM, "Setting",      GetPeriods())       %>% rbind(games$Attributes)
 games$Attributes <- IdentifyValues(games$Texts, games$TDM, "Soundtrack",   GetSoundstracks())  %>% rbind(games$Attributes)
 games$Attributes <- IdentifyValues(games$Texts, games$TDM, "Vehicle",      GetVehicles())      %>% rbind(games$Attributes)
 games$Attributes <- IdentifyValues(games$Texts, games$TDM, "Weapon",       GetWeapons())       %>% rbind(games$Attributes)
