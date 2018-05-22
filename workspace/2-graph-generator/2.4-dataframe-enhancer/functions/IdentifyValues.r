@@ -3,8 +3,6 @@
 # values
 # ==============================================================================
 IdentifyValues <- function(games.texts, games.tdm, type, values) {
-  games.texts = as.data.table(games.texts)
-
   # identify values in game text
   lapply(values, function(value){
     # find documents where value appear

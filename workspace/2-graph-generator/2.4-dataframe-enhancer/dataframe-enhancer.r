@@ -25,6 +25,7 @@ source("functions/SetYear.r", encoding = "UTF-8")
 # ==============================================================================
 games <- readRDS("../2.3-dataframe-renamer/data/games.rds")
 games$Attributes <- as.data.table(games$Attributes)
+games$Texts <- as.data.table(games$Texts)
 
 # ==============================================================================
 # ENHANCE VALUES
