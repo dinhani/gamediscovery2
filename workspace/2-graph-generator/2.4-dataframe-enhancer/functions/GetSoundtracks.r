@@ -2,7 +2,7 @@
 # Soundtracks to be identified
 # ==============================================================================
 GetSoundstracks <- function() {
-  values <- c(
+  values <- list(
     "Heavy Metal",
     "Hip hop",
     "Orchestral",

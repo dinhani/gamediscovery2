@@ -2,7 +2,7 @@
 # Atmospheres to be identified
 # ==============================================================================
 GetAtmospheres <- function() {
-  values <- c(
+  values <- list(
     "Beautiful",
     "Bizarre",
     "Disgusting",

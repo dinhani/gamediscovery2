@@ -2,10 +2,7 @@
 # Organization to be identified
 # ==============================================================================
 GetOrganizations <- function() {
-  values <- c()
-
-  values <- c(
-    values,
+  values <- list(
     "CIA",
     "Delta Force",
     "FBI",

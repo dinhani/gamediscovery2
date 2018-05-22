@@ -2,7 +2,7 @@
 # Periods to be identified
 # ==============================================================================
 GetPeriods <- function() {
-  values <- c(
+  values <- list(
     "Autumn",
     "Future",
     "Past",

@@ -2,7 +2,7 @@
 # Mechanics to be identified
 # ==============================================================================
 GetMechanics <- function() {
-  values <- c(
+  values <- list(
     "Backtracking",
     "Boss",
     "Bullet Time",
