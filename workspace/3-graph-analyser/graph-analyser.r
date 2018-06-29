@@ -24,7 +24,7 @@ game <- "game-mass-effect-3"
 QueryByGame(g, g.es, game)
 ego(g, 1, game)
 
-features <- c("platform-playstation-4", "mechanics-squad")
+features <- c("platform-playstation-4", "mechanic-squad")
 QueryByFeatures(g, features)
 
 QueryByGameAndFeatures(g, g.es, game, features)
