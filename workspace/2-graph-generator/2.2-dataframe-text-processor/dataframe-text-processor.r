@@ -18,9 +18,9 @@ games.corpus <- games$Texts$Description %>%
   VCorpus()
 
 games.corpus <- games.corpus %>%
-  tm_map(content_transformer(tolower)) %>%
   tm_map(content_transformer(function(x) iconv(x, to = "ASCII//TRANSLIT"))) %>%
   tm_map(content_transformer(str_replace_all), pattern = "[^A-Za-z'-]", replacement = " ") %>%
+  tm_map(content_transformer(tolower)) %>%
   tm_map(removeWords, stopwords("en")) %>%
   tm_map(stripWhitespace)
 

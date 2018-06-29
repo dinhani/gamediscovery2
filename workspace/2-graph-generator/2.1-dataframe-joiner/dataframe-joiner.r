@@ -65,6 +65,7 @@ games.attributes <- games.wikidata %>%
 
 games.texts = games.attributes %>%
   select(ID, Name) %>%
+  distinct() %>%
   left_join(games.wikipedia, by = c("ID" = "WP_GameID")) %>%
   left_join(games.mobygames, by = c("ID" = "MB_GameID")) %>%
   mutate(
