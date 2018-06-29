@@ -13,6 +13,7 @@ source("functions/MergeColumns.r", encoding = "UTF-8")
 # ==============================================================================
 games.wikidata  <- readRDS("../../1-datasource/1.1-wikidata/1.1.2-parser/data/games.rds")
 games.mobygames <- readRDS("../../1-datasource/1.2-mobygames/1.2.2-parser/data/games.rds")
+games.wikipedia  <- readRDS("../../1-datasource/1.3-wikipedia/1.3.2-parser/data/games.rds")
 
 # ==============================================================================
 # JOIN GAMES
@@ -63,12 +64,13 @@ games.attributes <- games.wikidata %>%
   unnest()
 
 games.texts = games.attributes %>%
-  inner_join(games.mobygames, by = c("ID" = "MB_GameID")) %>%
+  select(ID, Name) %>%
+  left_join(games.wikipedia, by = c("ID" = "WP_GameID")) %>%
+  left_join(games.mobygames, by = c("ID" = "MB_GameID")) %>%
   mutate(
-    Description = MB_Description
+    Description = paste(WP_Description, MB_Description, sep = "\n\n")
   ) %>%
-  select(ID, Name, Description) %>%
-  distinct()
+  select(ID, Name, Description)
 
 # ==============================================================================
 # SAVE GAMES

@@ -23,7 +23,7 @@ foreach(game.id = games$WD_GameID, game.url = games$WD_GameLink) %do% {
 
   # do not download if exists
   game.filename <- paste0("data/", game.id, ".html")
-  if (file.exists(game.filename) & file.info(game.filename) > 2048) {
+  if (file.exists(game.filename)) {
     next
   }
 
