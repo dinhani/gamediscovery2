@@ -3,6 +3,10 @@
 # ==============================================================================
 source("../../../libraries.r", encoding = "UTF-8")
 
+cl <- makeCluster(8)
+clusterEvalQ(cl, library(httr))
+registerDoParallel(cl)
+
 # ==============================================================================
 # READ GAMES
 # ==============================================================================
@@ -11,7 +15,7 @@ games <- readRDS("../../1.1-wikidata/1.1.2-parser/data/games.rds")
 # ==============================================================================
 # DOWNLOAD PAGES
 # ==============================================================================
-foreach(game.id = games$WD_GameID, game.url = games$WD_GameLink) %do% {
+foreach(game.id = games$WD_GameID, game.url = games$WD_GameLink) %dopar% {
   # do not download if without link
   if (game.url == "") {
     next

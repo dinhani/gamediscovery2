@@ -3,7 +3,7 @@
 # ==============================================================================
 source("../../../libraries.r", encoding = "UTF-8")
 
-cl <- makeCluster(16)
+cl <- makeCluster(8)
 clusterEvalQ(cl, library(httr))
 registerDoParallel(cl)
 
