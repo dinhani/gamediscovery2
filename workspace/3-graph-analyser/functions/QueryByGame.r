@@ -21,14 +21,14 @@ QueryByGame <- function(g, g.es, game) {
     FeatureWeight = features.vertices.edges.weight
   )
 
-  # calculate type intersection with main game
-  games.df2 <- games.df1[, .(FreqIntersection = mean(FeatureWeight) * (.N / features.vertices.types.table[FeatureType])), by = .(Game, FeatureType)]
+  # calculate type Weight with main game
+  games.df2 <- games.df1[, .(FeatureWeight = mean(FeatureWeight) * (.N / features.vertices.types.table[FeatureType])), by = .(Game, FeatureType)]
 
-  # calculate intersection of each game with main game
-  games.df3 <- games.df2[, .(FreqIntersectionTotal = sum(FreqIntersection)), by = .(Game)]
+  # calculate Weight of each game with main game
+  games.df3 <- games.df2[, .(Weight = sum(FeatureWeight)), by = .(Game)]
 
-  # get games games ordered by best intersections
-  games.ids <- games.df3[order(FreqIntersectionTotal, decreasing = TRUE), Game, ]
+  # get games games ordered by best Weights
+  games.ids <- games.df3[order(Weight, decreasing = TRUE), Game, ]
 
   # extract games vertices
   V(g)[games.ids]
