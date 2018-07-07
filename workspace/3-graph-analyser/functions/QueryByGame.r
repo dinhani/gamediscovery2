@@ -16,20 +16,21 @@ QueryByGame <- function(g, g.es, game) {
 
   # generate a table to perform calculations
   games.df1 <- data.table(
-    Game = features.edges.game$name,
+    Game = features.edges.game,
     FeatureType = features.edges.feature$Type,
-    FeatureWeight = features.edges.weight
+    Weight = features.edges.weight
   )
 
   # calculate type Weight with main game
-  games.df2 <- games.df1[, .(FeatureWeight = mean(FeatureWeight) * (.N / features.vertices.types.table[FeatureType])), by = .(Game, FeatureType)]
+  games.df2 <- games.df1[, .(FeatureCount = .N, Weight = mean(Weight)), by = .(Game, FeatureType)]
+  games.df2$MainGameFeatureCount <- features.vertices.types.table[games.df2$FeatureType]
+  games.df2$FeatureIntersection <- games.df2$FeatureCount / games.df2$MainGameFeatureCount
+  games.df2$Weight <- games.df2$Weight * games.df2$FeatureIntersection
 
   # calculate Weight of each game with main game
-  games.df3 <- games.df2[, .(Weight = sum(FeatureWeight)), by = .(Game)]
+  games.df3 <- games.df2[, .(Weight = sum(Weight)), by = .(Game)]
 
-  # get games games ordered by best Weights
+  # get games games ordered by best Weights and extract
   games.ids <- games.df3[order(Weight, decreasing = TRUE), Game, ]
-
-  # extract games vertices
   V(g)[games.ids]
 }
