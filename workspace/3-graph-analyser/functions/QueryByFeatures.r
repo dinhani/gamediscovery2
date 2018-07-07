@@ -1,15 +1,26 @@
 # ==============================================================================
 # Query the game graph for games containing all the requested features
 # ==============================================================================
-QueryByFeatures <- function(g, features) {
-  # query all games that have the requested features
-  games.ids.list <- lapply(features, FUN = ego, g = g, order = 1) # `ego` get the features neighbors
-  games.ids.list <- lapply(games.ids.list, FUN = "[[", 1) # `[[` extracts the vector from the `ego` result list
+QueryByFeatures <- function(g, g.es, features) {
+  # get edges between the features and the games
+  features.edges <- g.es[inc(features)]
+  features.edges.feature <- head_of(g, features.edges)
+  features.edges.game <- tail_of(g, features.edges)
+  features.edges.weight <- edge_attr(g, "Weight", features.edges)
+  features.edges.weight = ifelse(features.edges.weight == 0, 1, features.edges.weight)
 
-  # keep the games that appears for all requested features
-  games.ids <- reduce(games.ids.list, intersect)
+  # generate a table to perform calculations
+  games.df1 <- data.table(
+    Game = features.edges.game$name,
+    Weight = features.edges.weight
+  )
 
-  # extract vertices that are games from graph
-  games.vertices <- V(g)[games.ids]
-  games.vertices[games.vertices$Type == "Game"]
+  # calculate weight of games for the features
+  games.df2 = games.df1[order(Weight, decreasing = T), .(NumberOfFeatures = .N, Weight = sum(Weight)), by = Game]
+  
+  # keep only games that have all features
+  games.df3 = games.df2[NumberOfFeatures == length(features),,]
+
+  # extract games vertices
+  V(g)[games.df3$Game]
 }

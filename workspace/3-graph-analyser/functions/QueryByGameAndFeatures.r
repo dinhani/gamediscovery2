@@ -5,7 +5,7 @@
 QueryByGameAndFeatures <- function(g, g.es, game, features){
   # execute both queries
   results.bygame <- QueryByGame(g, g.es, game)
-  results.byfeature <- QueryByFeatures(g, features)
+  results.byfeature <- QueryByFeatures(g, g.es, features)
 
   # intersect the results of both queries
   V(g)[intersect(results.bygame, results.byfeature)]

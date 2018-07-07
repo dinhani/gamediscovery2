@@ -25,7 +25,7 @@ QueryByGame(g, g.es, game)
 ego(g, 1, game)
 
 features <- c("platform-playstation-3", "mechanic-squad")
-QueryByFeatures(g, features)
+QueryByFeatures(g, g.es, features)
 
 QueryByGameAndFeatures(g, g.es, game, features)
 

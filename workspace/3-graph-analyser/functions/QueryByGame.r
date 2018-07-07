@@ -9,16 +9,16 @@ QueryByGame <- function(g, g.es, game) {
   features.vertices.types.table <- table(features.vertices.types)
 
   # get edges between the found features and other games
-  features.vertices.edges <- g.es[inc(features.vertices)]
-  features.vertices.edges.feature <- head_of(g, features.vertices.edges)
-  features.vertices.edges.game <- tail_of(g, features.vertices.edges)
-  features.vertices.edges.weight <- edge_attr(g, "Weight", features.vertices.edges)
+  features.edges <- g.es[inc(features.vertices)]
+  features.edges.feature <- head_of(g, features.edges)
+  features.edges.game <- tail_of(g, features.edges)
+  features.edges.weight <- edge_attr(g, "Weight", features.edges)
 
   # generate a table to perform calculations
   games.df1 <- data.table(
-    Game = features.vertices.edges.game$name,
-    FeatureType = features.vertices.edges.feature$Type,
-    FeatureWeight = features.vertices.edges.weight
+    Game = features.edges.game$name,
+    FeatureType = features.edges.feature$Type,
+    FeatureWeight = features.edges.weight
   )
 
   # calculate type Weight with main game
