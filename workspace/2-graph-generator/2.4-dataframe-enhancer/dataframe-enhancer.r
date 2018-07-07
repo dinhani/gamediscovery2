@@ -17,7 +17,8 @@ source("functions/GetSoundtracks.r", encoding = "UTF-8")
 source("functions/GetVehicles.r", encoding = "UTF-8")
 source("functions/GetWeapons.r", encoding = "UTF-8")
 source("functions/IdentifyValues.r", encoding = "UTF-8")
-source("functions/SetWeight.r", encoding = "UTF-8")
+source("functions/SetWeightCalculated.r", encoding = "UTF-8")
+source("functions/SetWeightType.r", encoding = "UTF-8")
 source("functions/SetYear.r", encoding = "UTF-8")
 
 # ==============================================================================
@@ -26,6 +27,12 @@ source("functions/SetYear.r", encoding = "UTF-8")
 games <- readRDS("../2.3-dataframe-renamer/data/games.rds")
 games$Attributes <- as.data.table(games$Attributes)
 games$Texts <- as.data.table(games$Texts)
+
+# ==============================================================================
+# ADD WEIGHT COLUMNS
+# ==============================================================================
+games$Attributes$WeightType = 0
+games$Attributes$WeightModifier = 1
 
 # ==============================================================================
 # ENHANCE VALUES
@@ -40,10 +47,12 @@ games$Attributes <- IdentifyValues(games$Texts, games$TDM, "Setting",      GetPe
 games$Attributes <- IdentifyValues(games$Texts, games$TDM, "Soundtrack",   GetSoundstracks())  %>% rbind(games$Attributes)
 games$Attributes <- IdentifyValues(games$Texts, games$TDM, "Vehicle",      GetVehicles())      %>% rbind(games$Attributes)
 games$Attributes <- IdentifyValues(games$Texts, games$TDM, "Weapon",       GetWeapons())       %>% rbind(games$Attributes)
-games$Attributes <- SetYear(games$Attributes)
-games$Attributes <- SetWeight(games$Attributes)
 
-games$Attributes <- unique(games$Attributes)
+games$Attributes <- SetYear(games$Attributes)
+games$Attributes <- SetWeightType(games$Attributes)
+games$Attributes <- SetWeightCalculated(games$Attributes)
+
+games$Attributes <- unique(games$Attributes, by=c("Name", "Type", "Value"))
 
 # ==============================================================================
 # SAVE GAMES

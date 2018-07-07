@@ -7,7 +7,6 @@ QueryByFeatures <- function(g, g.es, features) {
   features.edges.feature <- head_of(g, features.edges)
   features.edges.game <- tail_of(g, features.edges)
   features.edges.weight <- edge_attr(g, "Weight", features.edges)
-  features.edges.weight = ifelse(features.edges.weight == 0, 1, features.edges.weight)
 
   # generate a table to perform calculations
   games.df1 <- data.table(
@@ -17,7 +16,7 @@ QueryByFeatures <- function(g, g.es, features) {
 
   # calculate weight of games for the features
   games.df2 = games.df1[order(Weight, decreasing = T), .(NumberOfFeatures = .N, Weight = sum(Weight)), by = Game]
-  
+
   # keep only games that have all features
   games.df3 = games.df2[NumberOfFeatures == length(features),,]
 
