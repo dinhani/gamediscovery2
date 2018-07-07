@@ -20,7 +20,7 @@ games <- readRDS("../2.5-dataframe-discarder/data/games.rds")
 # IDS
 games.ids <- games$Attributes %>%
   mutate(
-    ID = GenerateID("Game", Name),
+    ID = GenerateID("Game", ID),
     TypeID = GenerateID(Type, Value)
   )
 

@@ -20,12 +20,12 @@ g.es <- E(g)
 # ==============================================================================
 # EXAMPLE QUERIES
 # ==============================================================================
-game <- "game-mass-effect-3"
-QueryByGame(g, g.es, game)
+game <- "game-753511" # Mass Effect 3
+QueryByGame(g, g.es, game)$Label %>% head(20)
 ego(g, 1, game)
 
 features <- c("platform-playstation-3", "mechanic-squad")
-QueryByFeatures(g, g.es, features)
+QueryByFeatures(g, g.es, features)$Label
 
 QueryByGameAndFeatures(g, g.es, game, features)
 
