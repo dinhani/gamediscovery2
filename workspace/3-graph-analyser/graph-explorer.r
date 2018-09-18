@@ -24,6 +24,7 @@ g.es <- E(g)
 # ==============================================================================
 ui.filters <- as.numeric(g.v)
 names(ui.filters) <- paste0(g.v$Type, " - ", g.v$Label)
+ui.filters <- ui.filters[!str_detect(names(ui.filters), "Game - ")] # remove games
 ui.filters <- ui.filters[order(names(ui.filters))] # sort filters
 
 ui <- fluidPage(
