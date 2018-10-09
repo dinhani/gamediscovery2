@@ -25,8 +25,8 @@ ParseMobyGamesHTMLFile <- function(filename) {
   }
 
   # parse description
-  game.description = html %>% html_node(css = ".col-md-8.col-lg-8") %>% html_text() %>% str_replace_all("\n", " ")
-  game.description = str_extract(game.description, "(?<=\\?Description).+(?=\\[edit description)")
+  game.description <- html %>% html_node(css = ".col-md-8.col-lg-8") %>% html_text() %>% str_replace_all("\n", " ")
+  game.description <- str_extract(game.description, "(?<=\\?Description).+(?=\\[edit description)")
 
   # generate final dataframe
   data.frame(

@@ -1,38 +1,28 @@
 # ==============================================================================
 # LIBRARIES
 # ==============================================================================
-source("../../../libraries.r", encoding = "UTF-8")
-
-cl <- makeCluster(7)
-clusterEvalQ(cl, library(dplyr))
-clusterEvalQ(cl, library(zoo))
-clusterEvalQ(cl, library(rvest))
-clusterEvalQ(cl, library(stringr))
+source("libraries.r", encoding = "UTF-8")
 
 # ==============================================================================
 # FUNCTIONS
 # ==============================================================================
-source("functions/ParseMobyGamesHTMLFile.r", encoding = "UTF-8")
-clusterExport(cl, c("ParseMobyGamesHTMLFile", "ParseMobyGamesSection"))
+source("1-datasource/1.2-mobygames/1.2.2-parser/functions/ParseMobyGamesHTMLFile.r", encoding = "UTF-8")
 
 # ==============================================================================
 # READ FILES
 # ==============================================================================
-games.files <- list.files("../1.2.1-downloader/data/", pattern = "*.html", full.names = TRUE)
+games.files <- list.files("1-datasource/1.2-mobygames/1.2.1-downloader/data/", pattern = "*.html", full.names = TRUE)
 
 # ==============================================================================
 # PARSE FILES
 # ==============================================================================
-games <- pblapply(cl = cl, games.files, ParseMobyGamesHTMLFile) %>%
-  rbindlist(fill = TRUE) %>%
+games <- future_map_dfr(games.files, ParseMobyGamesHTMLFile) %>%
   mutate(
     Platform = if_else(is.na(Platforms), Platform, Platforms)
-  )
-
-# add column prefix
-colnames(games) <- paste0("MB_", colnames(games))
+  ) %>%
+  set_names(paste0("MB_", colnames(.)))
 
 # ==============================================================================
 # SAVE GAMES
 # ==============================================================================
-saveRDS(games, file = "data/games.rds")
+saveRDS(games, file = "1-datasource/1.2-mobygames/1.2.2-parser/data/games.rds")
