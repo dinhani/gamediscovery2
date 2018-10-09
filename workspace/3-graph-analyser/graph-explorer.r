@@ -1,21 +1,20 @@
 # ==============================================================================
 # LIBRARIES
 # ==============================================================================
-source("../libraries.r", encoding = "UTF-8")
-library(igraph)
+source("libraries.r", encoding = "UTF-8")
 library(shiny)
 
 # ==============================================================================
 # FUNCTIONS
 # ==============================================================================
-source("functions/QueryByGame.r", encoding = "UTF-8")
-source("functions/QueryByFeatures.r", encoding = "UTF-8")
-source("functions/QueryByGameAndFeatures.r", encoding = "UTF-8")
+source("3-graph-analyser/functions/QueryByGame.r", encoding = "UTF-8")
+source("3-graph-analyser/functions/QueryByFeatures.r", encoding = "UTF-8")
+source("3-graph-analyser/functions/QueryByGameAndFeatures.r", encoding = "UTF-8")
 
 # ==============================================================================
 # DATA
 # ==============================================================================
-g <- readRDS("../2-graph-generator/2.6-dataframe-to-graph/data/graph.rds")
+g <- readRDS("2-graph-generator/2.6-dataframe-to-graph/data/graph.rds")
 g.v <- V(g)
 g.es <- E(g)
 
