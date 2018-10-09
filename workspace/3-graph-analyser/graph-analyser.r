@@ -26,4 +26,4 @@ ego(g, 1, game.id)
 game.features <- c("platform-playstation-3", "mechanic-squad")
 QueryByFeatures(g, g.es, game.features)$Label
 
-QueryByGameAndFeatures(g, g.es, game.id, game.features)
+QueryByGameAndFeatures(g, g.es, game.id, game.features)$Label %>% head(20)
