@@ -2,22 +2,20 @@
 # COMMON LIBRARIES
 # ==============================================================================
 
-# DataFrames
+# Data Frames
+library(tidyverse)
 library(data.table)
-library(tibble)
-library(dplyr)
-library(tidyr)
-library(foreach)
-library(purrr)
+library(furrr)
+
+# Graphs
+library(igraph)
 
 # Time Series
-library(zoo)
 library(xts)
 
 # Strings
 library(tm)
 library(qdap)
-library(stringr)
 library(lettercase)
 
 # Dates
@@ -26,8 +24,12 @@ library(lubridate)
 # Web
 library(httr)
 library(rvest)
+library(SPARQL)
 
 # Parallelism
+library(foreach)
 library(parallel)
 library(doParallel)
+library(future)
 library(pbapply)
+plan(multiprocess)

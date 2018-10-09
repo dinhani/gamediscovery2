@@ -9,6 +9,8 @@ DownloadRelationships <- function(entityPrefix, entityCondition, additionalEntit
   }
 
   # download and save
-  QueryWikidata(entityPrefix, entityCondition, additionalEntityPrefix, additionalEntityCondition, entityLink) %>%
-    SaveWikidata(filename)
+  future({
+    QueryWikidata(entityPrefix, entityCondition, additionalEntityPrefix, additionalEntityCondition, entityLink) %>%
+      SaveWikidata(filename)
+  })
 }

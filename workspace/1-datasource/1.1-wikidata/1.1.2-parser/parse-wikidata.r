@@ -1,21 +1,20 @@
 # ==============================================================================
 # LIBRARIES
 # ==============================================================================
-source("../../../libraries.r", encoding = "UTF-8")
+source("libraries.r", encoding = "UTF-8")
 
 # ==============================================================================
 # FUNCTIONS
 # ==============================================================================
-source("functions/ParseWikidataRelationshipFile.r", encoding = "UTF-8")
-
-source("functions/ParseWikidataID.r", encoding = "UTF-8")
-source("functions/ParseWikidataLabel.r", encoding = "UTF-8")
-source("functions/ParseWikidataLink.r", encoding = "UTF-8")
+source("1-datasource/1.1-wikidata/1.1.2-parser/functions/ParseWikidataRelationshipFile.r", encoding = "UTF-8")
+source("1-datasource/1.1-wikidata/1.1.2-parser/functions/ParseWikidataID.r", encoding = "UTF-8")
+source("1-datasource/1.1-wikidata/1.1.2-parser/functions/ParseWikidataLabel.r", encoding = "UTF-8")
+source("1-datasource/1.1-wikidata/1.1.2-parser/functions/ParseWikidataLink.r", encoding = "UTF-8")
 
 # ==============================================================================
 # READ GAMES
 # ==============================================================================
-games.base <- fread("../1.1.1-downloader/data/Game.tsv") %>%
+games.base <- fread("1-datasource/1.1-wikidata/1.1.1-downloader/data/Game.tsv") %>%
   mutate(
     GameID = ParseWikidataID(GameID),
     GameLabel = ParseWikidataLabel(GameLabel),
@@ -25,19 +24,17 @@ games.base <- fread("../1.1.1-downloader/data/Game.tsv") %>%
 # ==============================================================================
 # READ GAMES RELATIONSHIPS
 # ==============================================================================
-games.relationships.files <- list.files("../1.1.1-downloader/data/", pattern = "Game-", full.names = TRUE)
-games.relationships <- lapply(games.relationships.files, ParseWikidataRelationshipFile)
+games.relationships.files <- list.files("1-datasource/1.1-wikidata//1.1.1-downloader/data/", pattern = "Game-", full.names = TRUE)
+games.relationships <- map(games.relationships.files, ParseWikidataRelationshipFile)
 
 # ==============================================================================
 # JOIN GAMES AND RELATIONSHIPS
 # ==============================================================================
 games <- append(games.relationships, list(games.base), 0) %>%
-  reduce(left_join, by = "GameID")
-
-# add column prefix
-colnames(games) <- paste0("WD_", colnames(games))
+  reduce(left_join, by = "GameID") %>% 
+  set_names(paste0("WD_", colnames(.)))
 
 # ==============================================================================
 # SAVES GAMES
 # ==============================================================================
-saveRDS(games, file = "data/games.rds")
+saveRDS(games, file = "1-datasource/1.1-wikidata/1.1.2-parser/data/games.rds")

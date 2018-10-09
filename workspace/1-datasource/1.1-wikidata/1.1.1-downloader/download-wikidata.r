@@ -1,16 +1,15 @@
 # ==============================================================================
 # LIBRARIES
 # ==============================================================================
-source("../../../libraries.r", encoding = "UTF-8")
-library(SPARQL)
+source("libraries.r", encoding = "UTF-8")
 
 # ==============================================================================
 # FUNCTIONS
 # ==============================================================================
-source("functions/QueryWikidata.r", encoding = "UTF-8")
-source("functions/SaveWikidata.r", encoding = "UTF-8")
-source("functions/DownloadRelationships.r", encoding = "UTF-8")
-source("functions/DownloadRelationshipsOfGames.r", encoding = "UTF-8")
+source("1-datasource/1.1-wikidata/1.1.1-downloader/functions/QueryWikidata.r", encoding = "UTF-8")
+source("1-datasource/1.1-wikidata/1.1.1-downloader/functions/SaveWikidata.r", encoding = "UTF-8")
+source("1-datasource/1.1-wikidata/1.1.1-downloader/functions/DownloadRelationships.r", encoding = "UTF-8")
+source("1-datasource/1.1-wikidata/1.1.1-downloader/functions/DownloadRelationshipsOfGames.r", encoding = "UTF-8")
 
 # ==============================================================================
 # DOWNLOAD - GAMES
