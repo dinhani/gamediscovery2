@@ -1,33 +1,25 @@
 # ==============================================================================
 # LIBRARIES
 # ==============================================================================
-source("../../../libraries.r", encoding = "UTF-8")
-
-cl <- makeCluster(7)
-clusterEvalQ(cl, library(dplyr))
-clusterEvalQ(cl, library(rvest))
-clusterEvalQ(cl, library(stringr))
+source("libraries.r", encoding = "UTF-8")
 
 # ==============================================================================
 # FUNCTIONS
 # ==============================================================================
-source("functions/ParseWikipediaHtmlFile.r", encoding = "UTF-8")
+source("1-datasource/1.3-wikipedia/1.3.2-parser/functions/ParseWikipediaHtmlFile.r", encoding = "UTF-8")
 
 # ==============================================================================
 # READ FILES
 # ==============================================================================
-games.files <- list.files("../1.3.1-downloader/data/", pattern = "*.html", full.names = TRUE)
+games.files <- list.files("1-datasource/1.3-wikipedia/1.3.1-downloader/data/", pattern = "*.html", full.names = TRUE)
 
 # ==============================================================================
 # PARSE FILES
 # ==============================================================================
-games <- pblapply(cl = cl, games.files, ParseWikpidiaHTMLFile) %>%
-  rbindlist(fill = TRUE)
-
-# add column prefix
-colnames(games) <- paste0("WP_", colnames(games))
+games <- future_map_dfr(games.files, ParseWikpidiaHTMLFile, .progress = TRUE) %>%
+  set_names(paste0("WP_", colnames(.)))
 
 # ==============================================================================
 # SAVE GAMES
 # ==============================================================================
-saveRDS(games, file = "data/games.rds")
+saveRDS(games, file = "1-datasource/1.3-wikipedia/1.3.2-parser/data/games.rds")

@@ -1,28 +1,24 @@
 # ==============================================================================
 # LIBRARIES
 # ==============================================================================
-source("../../../libraries.r", encoding = "UTF-8")
-
-cl <- makeCluster(8)
-clusterEvalQ(cl, library(httr))
-registerDoParallel(cl)
+source("libraries.r", encoding = "UTF-8")
 
 # ==============================================================================
 # READ GAMES
 # ==============================================================================
-games <- readRDS("../../1.1-wikidata/1.1.2-parser/data/games.rds")
+games <- readRDS("1-datasource//1.1-wikidata/1.1.2-parser/data/games.rds")
 
 # ==============================================================================
 # DOWNLOAD PAGES
 # ==============================================================================
-foreach(game.id = games$WD_GameID, game.url = games$WD_GameLink) %do% {
+future_walk2(games$WD_GameID, games$WD_GameLink, .progress = TRUE, .f = function(game.id, game.url) {
   # do not download if without link
-  if (game.url == "") {
+  if (length(game.url) == 0) {
     next
   }
 
   # do not download if exists
-  game.filename <- paste0("data/", game.id, ".html")
+  game.filename <- paste0("1-datasource/1.3-wikipedia/1.3.1-downloader/data/", game.id, ".html")
   if (file.exists(game.filename)) {
     next
   }
@@ -30,4 +26,4 @@ foreach(game.id = games$WD_GameID, game.url = games$WD_GameLink) %do% {
   # download
   print(game.url)
   GET(game.url, write_disk(game.filename, overwrite = TRUE))
-}
+})
