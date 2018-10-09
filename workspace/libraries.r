@@ -5,7 +5,6 @@
 # Data Frames
 library(tidyverse)
 library(data.table)
-library(furrr)
 
 # Graphs
 library(igraph)
@@ -17,6 +16,7 @@ library(xts)
 library(tm)
 library(qdap)
 library(lettercase)
+library(RWeka)
 
 # Dates
 library(lubridate)
@@ -27,9 +27,6 @@ library(rvest)
 library(SPARQL)
 
 # Parallelism
-library(foreach)
-library(parallel)
-library(doParallel)
+library(furrr)
 library(future)
-library(pbapply)
 plan(multiprocess)

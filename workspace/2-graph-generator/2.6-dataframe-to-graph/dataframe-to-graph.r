@@ -1,18 +1,17 @@
 # ==============================================================================
 # LIBRARIES
 # ==============================================================================
-source("../../libraries.r", encoding = "UTF-8")
-library(igraph)
+source("libraries.r", encoding = "UTF-8")
 
 # ==============================================================================
 # FUNCTIONS
 # ==============================================================================
-source("functions/GenerateID.r", encoding = "UTF-8")
+source("2-graph-generator/2.6-dataframe-to-graph/functions/GenerateID.r", encoding = "UTF-8")
 
 # ==============================================================================
 # READ GAMES
 # ==============================================================================
-games <- readRDS("../2.5-dataframe-discarder/data/games.rds")
+games <- readRDS("2-graph-generator//2.5-dataframe-discarder/data/games.rds")
 
 # ==============================================================================
 # GENERATE GRAPH
@@ -61,4 +60,4 @@ graph <- graph_from_data_frame(graph.edges, vertices = graph.vertices, directed 
 # ==============================================================================
 # SAVE GRAPH
 # ==============================================================================
-saveRDS(graph, file = "data/graph.rds")
+saveRDS(graph, file = "2-graph-generator/2.6-dataframe-to-graph/data/graph.rds")

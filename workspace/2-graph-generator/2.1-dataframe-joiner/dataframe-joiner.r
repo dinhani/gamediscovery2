@@ -1,19 +1,19 @@
 # ==============================================================================
 # LIBRARIES
 # ==============================================================================
-source("../../libraries.r", encoding = "UTF-8")
+source("libraries.r", encoding = "UTF-8")
 
 # ==============================================================================
 # FUNCTIONS
 # ==============================================================================
-source("functions/MergeColumns.r", encoding = "UTF-8")
+source("2-graph-generator/2.1-dataframe-joiner/functions/MergeColumns.r", encoding = "UTF-8")
 
 # ==============================================================================
 # READ GAMES
 # ==============================================================================
-games.wikidata  <- readRDS("../../1-datasource/1.1-wikidata/1.1.2-parser/data/games.rds")
-games.mobygames <- readRDS("../../1-datasource/1.2-mobygames/1.2.2-parser/data/games.rds")
-games.wikipedia  <- readRDS("../../1-datasource/1.3-wikipedia/1.3.2-parser/data/games.rds")
+games.wikidata  <- readRDS("1-datasource/1.1-wikidata/1.1.2-parser/data/games.rds")
+games.mobygames <- readRDS("1-datasource/1.2-mobygames/1.2.2-parser/data/games.rds")
+games.wikipedia  <- readRDS("1-datasource/1.3-wikipedia/1.3.2-parser/data/games.rds")
 
 # ==============================================================================
 # JOIN GAMES
@@ -77,4 +77,4 @@ games.texts = games.attributes %>%
 # SAVE GAMES
 # ==============================================================================
 games = list(Attributes = games.attributes, Texts = games.texts)
-saveRDS(games, file = "data/games.rds")
+saveRDS(games, file = "2-graph-generator/2.1-dataframe-joiner/data/games.rds")

@@ -1,12 +1,12 @@
 # ==============================================================================
 # LIBRARIES
 # ==============================================================================
-source("../../libraries.r", encoding = "UTF-8")
+source("libraries.r", encoding = "UTF-8")
 
 # ==============================================================================
 # READ GAMES
 # ==============================================================================
-games <- readRDS("../2.4-dataframe-enhancer/data/games.rds")
+games <- readRDS("2-graph-generator/2.4-dataframe-enhancer/data/games.rds")
 
 # ==============================================================================
 # DISCARD VALUES
@@ -24,4 +24,4 @@ games$Attributes <- games$Attributes %>%
 # ==============================================================================
 # SAVE GAMES
 # ==============================================================================
-saveRDS(games, file = "data/games.rds")
+saveRDS(games, file = "2-graph-generator/2.5-dataframe-discarder/data/games.rds")
