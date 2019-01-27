@@ -1,41 +1,44 @@
 # ==============================================================================
 # LIBRARIES
 # ==============================================================================
+library(igraph)
+
 library(tidyverse)
 library(data.table)
+library(glue)
 
-library(igraph)
 library(shiny)
 library(DT)
 
 # ==============================================================================
 # FUNCTIONS
 # ==============================================================================
-source("3-graph-analyser/functions/QueryByGame.r", encoding = "UTF-8")
-source("3-graph-analyser/functions/QueryByFeatures.r", encoding = "UTF-8")
-source("3-graph-analyser/functions/QueryByGameAndFeatures.r", encoding = "UTF-8")
+source("functions/QueryByGame.r", encoding = "UTF-8")
+source("functions/QueryByFeatures.r", encoding = "UTF-8")
+source("functions/QueryByGameAndFeatures.r", encoding = "UTF-8")
 
 # ==============================================================================
 # DATA
 # ==============================================================================
-g <- readRDS("2-graph-generator/2.6-dataframe-to-graph/data/graph.rds")
+# CHART
+g <- readRDS("data/graph.rds")
 g.v <- V(g)
 g.es <- E(g)
+
+# FILTERS
+filters <- as.numeric(g.v) %>% set_names(paste0(g.v$Type, " - ", g.v$Label))
 
 # ==============================================================================
 # UI
 # ==============================================================================
-ui.filters <- as.numeric(g.v)
-names(ui.filters) <- paste0(g.v$Type, " - ", g.v$Label)
-ui.filters <- ui.filters[!str_detect(names(ui.filters), "Game - ")] # remove games
-ui.filters <- ui.filters[order(names(ui.filters))] # sort filters
-
 ui <- fluidPage(
   fluidRow(
+    # FILTERS
     column(
       12,
-      selectInput("filters", "Filters:", choices = ui.filters, multiple = TRUE, width = "100%")
+      selectInput("filters", "Filters:", choices = NULL, multiple = TRUE, width = "100%")
     ),
+    # RESULTS
     column(
       12,
       DTOutput("games")
@@ -46,14 +49,24 @@ ui <- fluidPage(
 # ==============================================================================
 # SERVER
 # ==============================================================================
-server <- function(input, output) {
+server <- function(input, output, session) {
+
+  # ============================================================================
+  # INIT FILTERS
+  # ============================================================================
+
+  updateSelectizeInput(session, "filters", choices = filters, selected = as.numeric(g.v["platform-playstation-4"]), server = TRUE)
+
+  # ============================================================================
+  # SEARCH GAMES
+  # ============================================================================
   searchGames <- reactive({
     # run only if have filters set
     req(input$filters)
 
     # get nodes from filters
     filters.vertices <- g.v[as.numeric(input$filters)]
-    filters.types <- map_chr(g.v[ui.filters[1:3]], function(v) v$Type)
+    filters.types <- g.v[filters.vertices]$Type
 
     # check type of search
     hasGame <- any(filters.types == "Game")
@@ -69,7 +82,9 @@ server <- function(input, output) {
     }
     # search by game and feature
     if (hasGame & hasFeature) {
-      games <- QueryByGameAndFeatures(g, g.es, filters.vertices)
+      filters.game <- filters.vertices[filters.types == "Game"][1]
+      filters.features <- filters.vertices[filters.types != "Game"]
+      games <- QueryByGameAndFeatures(g, g.es, filters.game, filters.features)
     }
 
     return(games)
@@ -77,14 +92,23 @@ server <- function(input, output) {
 
   # render result
   output$games <- renderDT({
-    games <- searchGames() %>% head(20)
+    # search games
+    games <- searchGames() %>% head(50)
 
-    games.df <- data.frame(
+    # transform games into a table
+    games.df <- tibble(
       Cover = paste0("<img src=\"", games$Cover, "\">"),
       Label = games$Label,
-      stringsAsFactors = FALSE
+      Tags = map_chr(
+        games,
+        ~ map_chr(
+          ego(g, 1, .x),
+          ~ glue("<div style='display:inline-block; width: 200px; margin-right: 1rem; margin-bottom: 1rem;'>{.x$Type} - {.x$Label}</div>") %>% sort() %>% paste(collapse = "")
+        )
+      )
     )
 
+    # render game table
     datatable(
       games.df,
       escape = FALSE,
@@ -92,11 +116,10 @@ server <- function(input, output) {
       selection = "none",
       rownames = FALSE,
       options = list(
-        scrollY = "800px",
         paging = FALSE,
         columnDefs = list(
           list(class = "dt-center", width = "20%", targets = c(0)),
-          list(width = "20%", targets = c(0))
+          list(width = "20%", targets = c(1))
         )
       )
     )

@@ -13,13 +13,13 @@ source("3-graph-analyser/functions/QueryByGameAndFeatures.r", encoding = "UTF-8"
 # ==============================================================================
 # READ GAMES
 # ==============================================================================
-g <- readRDS("2-graph-generator/2.6-dataframe-to-graph/data/graph.rds")
+g <- readRDS("3-graph-analyser/data/graph.rds")
 g.es <- E(g)
 
 # ==============================================================================
 # EXAMPLE QUERIES
 # ==============================================================================
-game.id <- "game-753511" # Mass Effect 3
+game.id <- "game-24589167" # Mass Effect 3
 QueryByGame(g, g.es, game.id)$Label %>% head(20)
 ego(g, 1, game.id)
 

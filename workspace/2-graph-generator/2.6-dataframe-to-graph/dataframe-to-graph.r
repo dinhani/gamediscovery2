@@ -61,3 +61,4 @@ graph <- graph_from_data_frame(graph.edges, vertices = graph.vertices, directed 
 # SAVE GRAPH
 # ==============================================================================
 saveRDS(graph, file = "2-graph-generator/2.6-dataframe-to-graph/data/graph.rds")
+saveRDS(graph, file = "3-graph-analyser/data/graph.rds")

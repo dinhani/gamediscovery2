@@ -16,7 +16,7 @@ IdentifyValues <- function(games.texts, games.tdm, type, values) {
     # filter games by the scores found
     games.texts[
       games.rows,
-      .(ID, Name, Type = type, Value = value[[1]], WeightType = 0, WeightModifier = log(games.scores)),
+      .(ID, Name, Type = type, Value = value[[1]], WeightType = 0, WeightModifier = 1),
       ]
   }) %>%
     rbindlist() %>%

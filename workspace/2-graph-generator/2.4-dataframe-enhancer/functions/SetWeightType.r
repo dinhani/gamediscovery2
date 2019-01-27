@@ -8,36 +8,29 @@ SetWeightType <- function(games.attributes) {
   HIGH <- 4
   HIGHEST <- 8
 
-  games.attributes[
-    ,
-    .(
-      ID,
-      Name,
-      Type,
-      Value,
-      WeightType = recode(Type,
-        # HIGHEST
-        "Genre" = HIGHEST,
-        "Setting" = HIGHEST,
-        "Mechanic" = HIGHEST,
+  games.attributes$WeightType <- recode(
+    games.attributes$Type,
+    # HIGHEST
+    "Genre" = HIGHEST,
+    "Setting" = HIGHEST,
+    "Mechanic" = HIGHEST,
 
-        # HIGH
-        "Graphics" = HIGH,
-        "Characte" = HIGH,
-        "Sport" = HIGH,
-        "Vehicle" = HIGH,
+    # HIGH
+    "Graphics" = HIGH,
+    "Characte" = HIGH,
+    "Sport" = HIGH,
+    "Vehicle" = HIGH,
 
-        # MEDIUM HIGH
-        "Rating" = MEDIUM_HIGH,
+    # MEDIUM HIGH
+    "Rating" = MEDIUM_HIGH,
 
-        # MEDIUM
-        "Developer" = MEDIUM,
-        "Person" = MEDIUM,
+    # MEDIUM
+    "Developer" = MEDIUM,
+    "Person" = MEDIUM,
 
-        # NONE
-        .default = NONE
-      ),
-      WeightModifier
-    ),
-  ][]
+    # NONE
+    .default = NONE
+  )
+
+  games.attributes
 }
