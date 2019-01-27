@@ -10,6 +10,7 @@ Download and parse data from external sites like Wikidata and MobyGames.
 
 Aggregate and transform data from the external datasources into a single graph of games and features.
 
-### 3-graph-analyser
+### 3-app
 
-Query the graph of games for recommendations.
+Shiny app that queries the graph of games for recommendations.
+

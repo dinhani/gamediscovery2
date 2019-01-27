@@ -18,7 +18,7 @@ games <- readRDS("2-graph-generator//2.5-dataframe-discarder/data/games.rds")
 # ==============================================================================
 # BASE FOR GRAPH
 games.and.attributes <- games$Attributes %>%
-  left_join(games$Images, by = c("ID", "Name")) %>% 
+  left_join(games$Images, by = c("ID", "Name")) %>%
   mutate(
     ID = GenerateID("Game", ID),
     TypeID = GenerateID(Type, Value)
@@ -61,4 +61,4 @@ graph <- graph_from_data_frame(graph.edges, vertices = graph.vertices, directed 
 # SAVE GRAPH
 # ==============================================================================
 saveRDS(graph, file = "2-graph-generator/2.6-dataframe-to-graph/data/graph.rds")
-saveRDS(graph, file = "3-graph-analyser/data/graph.rds")
+saveRDS(graph, file = "3-app/data/graph.rds")

@@ -6,20 +6,20 @@ source("libraries.r", encoding = "UTF-8")
 # ==============================================================================
 # FUNCTIONS
 # ==============================================================================
-source("3-graph-analyser/functions/QueryByGame.r", encoding = "UTF-8")
-source("3-graph-analyser/functions/QueryByFeatures.r", encoding = "UTF-8")
-source("3-graph-analyser/functions/QueryByGameAndFeatures.r", encoding = "UTF-8")
+source("3-app/functions/QueryByGame.r", encoding = "UTF-8")
+source("3-app/functions/QueryByFeatures.r", encoding = "UTF-8")
+source("3-app/functions/QueryByGameAndFeatures.r", encoding = "UTF-8")
 
 # ==============================================================================
 # READ GAMES
 # ==============================================================================
-g <- readRDS("3-graph-analyser/data/graph.rds")
+g <- readRDS("3-app/data/graph.rds")
 g.es <- E(g)
 
 # ==============================================================================
 # EXAMPLE QUERIES
 # ==============================================================================
-game.id <- "game-24589167" # Mass Effect 3
+game.id <- "game-24589167" # God of War
 QueryByGame(g, g.es, game.id)$Label %>% head(20)
 ego(g, 1, game.id)
 
