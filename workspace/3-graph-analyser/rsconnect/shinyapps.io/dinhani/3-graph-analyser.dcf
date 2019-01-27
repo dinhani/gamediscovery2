@@ -5,6 +5,6 @@ account: dinhani
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 668703
-bundleId: 1839226
+bundleId: 1839270
 url: https://dinhani.shinyapps.io/3-graph-analyser/
-when: 1548567371.90079
+when: 1548572261.50494
