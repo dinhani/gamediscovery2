@@ -20,7 +20,7 @@ games.corpus.processed <- games.corpus
 games.corpus.processed <- tm_map(games.corpus.processed, content_transformer(function(x) iconv(x, to = "ASCII//TRANSLIT")))
 games.corpus.processed <- tm_map(games.corpus.processed, content_transformer(str_replace_all), pattern = "[^A-Za-z'-]", replacement = " ")
 games.corpus.processed <- tm_map(games.corpus.processed, stripWhitespace)
-games.corpus.processed <- tm_map(games.corpus.processed, games.corpus.processed, content_transformer(tolower))
+games.corpus.processed <- tm_map(games.corpus.processed, content_transformer(tolower))
 games.corpus.processed <- tm_map(games.corpus.processed, removeWords, stopwords("en"))
 
 games.tdm <- TermDocumentMatrix(games.corpus.processed,
