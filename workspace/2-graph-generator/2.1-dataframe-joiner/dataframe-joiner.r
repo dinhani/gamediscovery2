@@ -11,9 +11,9 @@ source("2-graph-generator/2.1-dataframe-joiner/functions/MergeColumns.r", encodi
 # ==============================================================================
 # READ GAMES
 # ==============================================================================
-games.wikidata  <- readRDS("1-datasource/1.1-wikidata/1.1.2-parser/data/games.rds")
+games.wikidata <- readRDS("1-datasource/1.1-wikidata/1.1.2-parser/data/games.rds")
 games.mobygames <- readRDS("1-datasource/1.2-mobygames/1.2.2-parser/data/games.rds")
-games.wikipedia  <- readRDS("1-datasource/1.3-wikipedia/1.3.2-parser/data/games.rds")
+games.wikipedia <- readRDS("1-datasource/1.3-wikipedia/1.3.2-parser/data/games.rds")
 
 # ==============================================================================
 # JOIN GAMES
@@ -22,39 +22,40 @@ games.attributes <- games.wikidata %>%
   left_join(games.mobygames, by = c("WD_GameID" = "MB_GameID")) %>%
   transmute(
     # BASIC
-    ID            = WD_GameID,
-    Name          = WD_GameLabel,
-    Image         = WP_Image,
+    ID = WD_GameID,
+    Name = WD_GameLabel,
 
     # INDUSTRY
-    Developer     = WD_DeveloperLabel,
-    Person        = MergeColumns(WD_ArtistLabel, WD_ComposerLabel, WD_DesignerLabel, WD_DirectorLabel),
-    Publisher     = WD_PublisherLabel,
-    Platform      = MergeColumns(WD_PlatformLabel, MB_Platform),
-    Rating        = MergeColumns(WD_ESRBLabel, MB_ESRB.Rating, WD_PEGILabel, WD_USKLabel),
+    Developer = WD_DeveloperLabel,
+    Person = MergeColumns(WD_ArtistLabel, WD_ComposerLabel, WD_DesignerLabel, WD_DirectorLabel),
+    Publisher = WD_PublisherLabel,
+    Platform = MergeColumns(WD_PlatformLabel, MB_Platform),
+    Rating = MergeColumns(WD_ESRBLabel, MB_ESRB.Rating, WD_PEGILabel, WD_USKLabel),
     RatingFeature = NULL,
-    Series        = WD_SeriesLabel,
-    Year          = WD_ReleaseDateLabel,
+    Series = WD_SeriesLabel,
+    Year = WD_ReleaseDateLabel,
 
     # GAMEPLAY
-    Duration      = NULL,
-    Engine        = WD_EngineLabel,
-    GameMode      = WD_GameModeLabel,
-    Genre         = MergeColumns(WD_GenreLabel, MB_Genre),
-    Graphic       = MergeColumns(MB_Perspective, MB_Visual, MB_Art, MB_Interface),
-    Mechanic      = MergeColumns(MB_Gameplay, MB_Pacing),
+    Duration = NULL,
+    Engine = WD_EngineLabel,
+    GameMode = WD_GameModeLabel,
+    Genre = MergeColumns(WD_GenreLabel, MB_Genre),
+    Graphic = MergeColumns(MB_Perspective, MB_Visual, MB_Art, MB_Interface),
+    Mechanic = MergeColumns(MB_Gameplay, MB_Pacing),
 
     # PLOT
-    Atmosphere    = NULL,
-    Character     = WD_CharacterLabel,
-    Creature      = NULL,
-    Organization  = NULL,
-    Setting       = MergeColumns(WD_LocationLabel, WD_PeriodLabel, WD_ThemeLabel,
-                                 MB_Setting, MB_Educational, MB_Misc, MB_Narrative),
-    Soundtrack    = NULL,
-    Sport         = MB_Sport,
-    Vehicle       = MB_Vehicular,
-    Weapon        = NULL
+    Atmosphere = NULL,
+    Character = WD_CharacterLabel,
+    Creature = NULL,
+    Organization = NULL,
+    Setting = MergeColumns(
+      WD_LocationLabel, WD_PeriodLabel, WD_ThemeLabel,
+      MB_Setting, MB_Educational, MB_Misc, MB_Narrative
+    ),
+    Soundtrack = NULL,
+    Sport = MB_Sport,
+    Vehicle = MB_Vehicular,
+    Weapon = NULL
   ) %>%
 
   # transform to long format
@@ -64,7 +65,14 @@ games.attributes <- games.wikidata %>%
   filter(sapply(Value, negate(is.null))) %>%
   unnest()
 
-games.texts = games.attributes %>%
+games.images <- games.attributes %>%
+  select(ID, Name) %>%
+  distinct() %>%
+  left_join(games.wikipedia, by = c("ID" = "WP_GameID")) %>%
+  rename(Cover = WP_Image) %>%
+  select(ID, Name, Cover)
+
+games.texts <- games.attributes %>%
   select(ID, Name) %>%
   distinct() %>%
   left_join(games.wikipedia, by = c("ID" = "WP_GameID")) %>%
@@ -77,5 +85,5 @@ games.texts = games.attributes %>%
 # ==============================================================================
 # SAVE GAMES
 # ==============================================================================
-games = list(Attributes = games.attributes, Texts = games.texts)
+games <- list(Attributes = games.attributes, Texts = games.texts, Images = games.images)
 saveRDS(games, file = "2-graph-generator/2.1-dataframe-joiner/data/games.rds")

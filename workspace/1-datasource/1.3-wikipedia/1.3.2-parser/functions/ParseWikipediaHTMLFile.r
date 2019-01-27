@@ -17,7 +17,7 @@ ParseWikpidiaHTMLFile <- function(filename) {
   game.description <- html %>% html_nodes("#mw-content-text p") %>% html_text() %>% paste(collapse = "\n")
 
   # parse game image
-  game.image <- html %>% html_nodes(".infobox img") %>% html_attr("src")
+  game.image <- html %>% html_nodes(".infobox img") %>% html_attr("src") %>% head(1)
   if (length(game.image) == 0) {
     game.image <- ""
   }

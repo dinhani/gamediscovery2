@@ -104,8 +104,7 @@ GetWeapons <- function() {
       "Maul",
       "Nunchaku",
       "Spear",
-      "Staff",
-      "magic staff",
+      list("Staff", "magic staff"),
       "Sword",
       "Trident"
     )

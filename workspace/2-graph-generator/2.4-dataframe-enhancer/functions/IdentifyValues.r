@@ -5,6 +5,9 @@
 IdentifyValues <- function(games.texts, games.tdm, type, values) {
   # identify values in game text
   lapply(values, function(value){
+    # log
+    print(value)
+
     # find documents where value appear
     games.scores <- tm_term_score(games.tdm, tolower(value))
     games.scores <- games.scores[games.scores >= 2]

@@ -16,33 +16,33 @@ games <- readRDS("2-graph-generator//2.5-dataframe-discarder/data/games.rds")
 # ==============================================================================
 # GENERATE GRAPH
 # ==============================================================================
-# IDS
-games.ids <- games$Attributes %>%
+# BASE FOR GRAPH
+games.and.attributes <- games$Attributes %>%
+  left_join(games$Images, by = c("ID", "Name")) %>% 
   mutate(
     ID = GenerateID("Game", ID),
     TypeID = GenerateID(Type, Value)
   )
 
-# VERTICES
-graph.vertices.games <- games.ids %>%
-  select(ID, Name) %>%
+# VERTICES - GAMES
+graph.vertices.games <- games.and.attributes %>%
+  select(ID, Name, Type, Cover) %>%
   rename(
     Label = Name
   ) %>%
   mutate(
     Type = "Game"
   ) %>%
-  select(ID, Label, Type) %>%
   distinct(ID, .keep_all = TRUE)
 
-graph.vertices.attributes <- games.ids %>%
+# VERTICES - NOT GAMES
+graph.vertices.attributes <- games.and.attributes %>%
   select(TypeID, Type, Value) %>%
   distinct() %>%
   rename(
     ID = TypeID,
     Label = Value
   ) %>%
-  select(ID, Label, Type) %>%
   distinct(ID, .keep_all = TRUE)
 
 graph.vertices <- graph.vertices.games %>%
@@ -50,7 +50,7 @@ graph.vertices <- graph.vertices.games %>%
   distinct()
 
 # EDGES
-graph.edges <- games.ids %>%
+graph.edges <- games.and.attributes %>%
   select(ID, TypeID, Weight) %>%
   distinct()
 
