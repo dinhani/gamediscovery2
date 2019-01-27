@@ -24,6 +24,7 @@ games.attributes <- games.wikidata %>%
     # BASIC
     ID            = WD_GameID,
     Name          = WD_GameLabel,
+    Image         = WP_Image,
 
     # INDUSTRY
     Developer     = WD_DeveloperLabel,

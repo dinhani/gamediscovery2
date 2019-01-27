@@ -16,9 +16,16 @@ ParseWikpidiaHTMLFile <- function(filename) {
   # parse game text
   game.description <- html %>% html_nodes("#mw-content-text p") %>% html_text() %>% paste(collapse = "\n")
 
+  # parse game image
+  game.image <- html %>% html_nodes(".infobox img") %>% html_attr("src")
+  if (length(game.image) == 0) {
+    game.image <- ""
+  }
+
   # generate final dataframe
   data.frame(
     GameID = game.id,
+    Image = game.image,
     Description = game.description,
     stringsAsFactors = FALSE
   )
