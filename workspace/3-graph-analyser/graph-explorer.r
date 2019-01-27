@@ -1,8 +1,12 @@
 # ==============================================================================
 # LIBRARIES
 # ==============================================================================
-source("libraries.r", encoding = "UTF-8")
+library(tidyverse)
+library(data.table)
+
+library(igraph)
 library(shiny)
+library(DT)
 
 # ==============================================================================
 # FUNCTIONS
@@ -34,7 +38,7 @@ ui <- fluidPage(
     ),
     column(
       12,
-      tableOutput("games")
+      DTOutput("games")
     )
   )
 )
@@ -72,9 +76,30 @@ server <- function(input, output) {
   })
 
   # render result
-  output$games <- renderTable({
+  output$games <- renderDT({
     games <- searchGames() %>% head(20)
-    data.frame(Label = games$Label, stringsAsFactors = FALSE)
+
+    games.df <- data.frame(
+      Cover = paste0("<img src=\"", games$Cover, "\">"),
+      Label = games$Label,
+      stringsAsFactors = FALSE
+    )
+
+    datatable(
+      games.df,
+      escape = FALSE,
+      filter = "top",
+      selection = "none",
+      rownames = FALSE,
+      options = list(
+        scrollY = "800px",
+        paging = FALSE,
+        columnDefs = list(
+          list(class = "dt-center", width = "20%", targets = c(0)),
+          list(width = "20%", targets = c(0))
+        )
+      )
+    )
   })
 }
 
