@@ -16,16 +16,16 @@ games.corpus <- games$Texts$Description %>%
   VectorSource() %>%
   VCorpus()
 
-games.corpus.processed <- games.corpus %>%
-  tm_map(content_transformer(function(x) iconv(x, to = "ASCII//TRANSLIT"))) %>%
-  tm_map(content_transformer(str_replace_all), pattern = "[^A-Za-z'-]", replacement = " ") %>%
-  tm_map(content_transformer(tolower)) %>%
-  tm_map(removeWords, stopwords("en")) %>%
-  tm_map(stripWhitespace)
+games.corpus.processed <- games.corpus
+games.corpus.processed <- tm_map(games.corpus.processed, content_transformer(function(x) iconv(x, to = "ASCII//TRANSLIT")))
+games.corpus.processed <- tm_map(games.corpus.processed, content_transformer(str_replace_all), pattern = "[^A-Za-z'-]", replacement = " ")
+games.corpus.processed <- tm_map(games.corpus.processed, stripWhitespace)
 
 games.tdm <- TermDocumentMatrix(games.corpus.processed,
   control = list(
     tokenize = function(x) NGramTokenizer(x, Weka_control(min = 1, max = 2)),
+    tolower = TRUE,
+    stopwords = stopwords("en"),
     bounds = list(global = c(3, Inf))
   )
 )
