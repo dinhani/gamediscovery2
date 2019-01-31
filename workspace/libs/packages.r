@@ -29,4 +29,3 @@ library(SPARQL)
 # Parallelism
 library(furrr)
 library(future)
-plan(multiprocess)

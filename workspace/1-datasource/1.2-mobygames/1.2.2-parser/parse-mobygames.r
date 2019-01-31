@@ -17,6 +17,7 @@ games.files <- list.files("1-datasource/1.2-mobygames/1.2.1-downloader/data/", p
 # ==============================================================================
 # PARSE FILES
 # ==============================================================================
+plan(multiprocess, workers = 1)
 games <- future_map_dfr(games.files, ParseMobyGamesHTMLFile, .progress = TRUE) %>%
   mutate(
     Platform = if_else(is.na(Platforms), Platform, Platforms)
