@@ -20,7 +20,7 @@ ParseWikpidiaHTMLFile <- function(filename) {
   # parse description
   description_nodes <- html_nodes(doc, xpath = "//p")
   description_text <- html_text(description_nodes)
-  game.description <- paste(description_text, collapse = "\n")
+  game.description <- paste(description_text, collapse = " ")
 
   # parse game image
   image_nodes <- html_nodes(doc, xpath = "//div/div/a/img")
