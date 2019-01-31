@@ -3,7 +3,7 @@
 # ==============================================================================
 ParseWikpidiaHTMLFile <- function(filename) {
   # parse file size
-  if (file.info(filename)$size == 0) {
+  if (file.size(filename) == 0) {
     return(NULL)
   }
 
@@ -11,13 +11,21 @@ ParseWikpidiaHTMLFile <- function(filename) {
   game.id <- str_extract(filename, "(?<=data/)(.+)(?=.html)")
 
   # read HTML
-  html <- read_html(filename)
+  doc <- tryCatch({
+    read_xml(file(filename))
+  }, error = function(e) {
+    read_html(file(filename))
+  })
 
-  # parse game text
-  game.description <- html %>% html_nodes("#mw-content-text p") %>% html_text() %>% paste(collapse = "\n")
+  # parse description
+  description_nodes <- html_nodes(doc, xpath = "//p")
+  description_text <- html_text(description_nodes)
+  game.description <- paste(description_text, collapse = "\n")
 
   # parse game image
-  game.image <- html %>% html_nodes(".infobox img") %>% html_attr("src") %>% head(1)
+  image_nodes <- html_nodes(doc, xpath = "//div/div/a/img")
+  image_srcs <- html_attr(image_nodes, "src")
+  game.image <- head(image_srcs, 1)
   if (length(game.image) == 0) {
     game.image <- ""
   }
