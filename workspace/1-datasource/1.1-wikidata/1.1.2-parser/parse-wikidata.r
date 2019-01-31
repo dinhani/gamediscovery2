@@ -1,15 +1,13 @@
 # ==============================================================================
 # LIBRARIES
 # ==============================================================================
-source("libraries.r", encoding = "UTF-8")
+source("libs/packages.r", encoding = "UTF-8")
 
 # ==============================================================================
 # FUNCTIONS
 # ==============================================================================
-source("1-datasource/1.1-wikidata/1.1.2-parser/functions/ParseWikidataRelationshipFile.r", encoding = "UTF-8")
-source("1-datasource/1.1-wikidata/1.1.2-parser/functions/ParseWikidataID.r", encoding = "UTF-8")
-source("1-datasource/1.1-wikidata/1.1.2-parser/functions/ParseWikidataLabel.r", encoding = "UTF-8")
-source("1-datasource/1.1-wikidata/1.1.2-parser/functions/ParseWikidataLink.r", encoding = "UTF-8")
+list.files("1-datasource/1.1-wikidata/1.1.2-parser/functions/", full.names = TRUE) %>%
+  walk(source, encoding = "UTF-8")
 
 # ==============================================================================
 # READ GAMES
@@ -31,7 +29,7 @@ games.relationships <- map(games.relationships.files, ParseWikidataRelationshipF
 # JOIN GAMES AND RELATIONSHIPS
 # ==============================================================================
 games <- append(games.relationships, list(games.base), 0) %>%
-  reduce(left_join, by = "GameID") %>% 
+  reduce(left_join, by = "GameID") %>%
   set_names(paste0("WD_", colnames(.)))
 
 # ==============================================================================

@@ -1,14 +1,13 @@
 # ==============================================================================
 # LIBRARIES
 # ==============================================================================
-source("libraries.r", encoding = "UTF-8")
+source("libs/packages.r", encoding = "UTF-8")
 
 # ==============================================================================
 # FUNCTIONS
 # ==============================================================================
-source("3-app/functions/QueryByGame.r", encoding = "UTF-8")
-source("3-app/functions/QueryByFeatures.r", encoding = "UTF-8")
-source("3-app/functions/QueryByGameAndFeatures.r", encoding = "UTF-8")
+list.files("3-app/functions/", full.names = TRUE) %>%
+  walk(source, encoding = "UTF-8")
 
 # ==============================================================================
 # READ GAMES

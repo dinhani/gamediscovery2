@@ -13,9 +13,8 @@ library(DT)
 # ==============================================================================
 # FUNCTIONS
 # ==============================================================================
-source("functions/QueryByGame.r", encoding = "UTF-8")
-source("functions/QueryByFeatures.r", encoding = "UTF-8")
-source("functions/QueryByGameAndFeatures.r", encoding = "UTF-8")
+list.files("./functions/", full.names = TRUE) %>%
+  walk(source, encoding = "UTF-8")
 
 # ==============================================================================
 # DATA

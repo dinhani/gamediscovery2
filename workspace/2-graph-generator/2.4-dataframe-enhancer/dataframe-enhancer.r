@@ -1,25 +1,13 @@
 # ==============================================================================
 # LIBRARIES
 # ==============================================================================
-source("libraries.r", encoding = "UTF-8")
+source("libs/packages.r", encoding = "UTF-8")
 
 # ==============================================================================
 # FUNCTIONS
 # ==============================================================================
-source("2-graph-generator/2.4-dataframe-enhancer/functions/GetAtmospheres.r", encoding = "UTF-8")
-source("2-graph-generator/2.4-dataframe-enhancer/functions/GetCharacters.r", encoding = "UTF-8")
-source("2-graph-generator/2.4-dataframe-enhancer/functions/GetCreatures.r", encoding = "UTF-8")
-source("2-graph-generator/2.4-dataframe-enhancer/functions/GetLocations.r", encoding = "UTF-8")
-source("2-graph-generator/2.4-dataframe-enhancer/functions/GetMechanics.r", encoding = "UTF-8")
-source("2-graph-generator/2.4-dataframe-enhancer/functions/GetOrganizations.r", encoding = "UTF-8")
-source("2-graph-generator/2.4-dataframe-enhancer/functions/GetPeriods.r", encoding = "UTF-8")
-source("2-graph-generator/2.4-dataframe-enhancer/functions/GetSoundtracks.r", encoding = "UTF-8")
-source("2-graph-generator/2.4-dataframe-enhancer/functions/GetVehicles.r", encoding = "UTF-8")
-source("2-graph-generator/2.4-dataframe-enhancer/functions/GetWeapons.r", encoding = "UTF-8")
-source("2-graph-generator/2.4-dataframe-enhancer/functions/IdentifyValues.r", encoding = "UTF-8")
-source("2-graph-generator/2.4-dataframe-enhancer/functions/SetWeightCalculated.r", encoding = "UTF-8")
-source("2-graph-generator/2.4-dataframe-enhancer/functions/SetWeightType.r", encoding = "UTF-8")
-source("2-graph-generator/2.4-dataframe-enhancer/functions/SetYear.r", encoding = "UTF-8")
+list.files("2-graph-generator/2.4-dataframe-enhancer/functions/", full.names = TRUE) %>%
+  walk(source, encoding = "UTF-8")
 
 # ==============================================================================
 # READ GAMES

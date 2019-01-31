@@ -1,14 +1,13 @@
 # ==============================================================================
 # LIBRARIES
 # ==============================================================================
-source("libraries.r", encoding = "UTF-8")
+source("libs/packages.r", encoding = "UTF-8")
 
 # ==============================================================================
 # FUNCTIONS
 # ==============================================================================
-source("2-graph-generator/2.3-dataframe-renamer/functions/RenameGenre.r", encoding = "UTF-8")
-source("2-graph-generator/2.3-dataframe-renamer/functions/RenamePlatform.r", encoding = "UTF-8")
-source("2-graph-generator/2.3-dataframe-renamer/functions/RenameRating.r", encoding = "UTF-8")
+list.files("2-graph-generator/2.3-dataframe-renamer/functions/", full.names = TRUE) %>%
+  walk(source, encoding = "UTF-8")
 
 # ==============================================================================
 # READ GAMES

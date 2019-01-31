@@ -1,12 +1,13 @@
 # ==============================================================================
 # LIBRARIES
 # ==============================================================================
-source("libraries.r", encoding = "UTF-8")
+source("libs/packages.r", encoding = "UTF-8")
 
 # ==============================================================================
 # FUNCTIONS
 # ==============================================================================
-source("1-datasource/1.3-wikipedia/1.3.2-parser/functions/ParseWikipediaHtmlFile.r", encoding = "UTF-8")
+list.files("1-datasource/1.3-wikipedia/1.3.2-parser/functions/", full.names = TRUE) %>%
+  walk(source, encoding = "UTF-8")
 
 # ==============================================================================
 # READ FILES

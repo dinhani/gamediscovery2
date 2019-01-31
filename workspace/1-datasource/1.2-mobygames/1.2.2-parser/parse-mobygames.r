@@ -1,12 +1,13 @@
 # ==============================================================================
 # LIBRARIES
 # ==============================================================================
-source("libraries.r", encoding = "UTF-8")
+source("libs/packages.r", encoding = "UTF-8")
 
 # ==============================================================================
 # FUNCTIONS
 # ==============================================================================
-source("1-datasource/1.2-mobygames/1.2.2-parser/functions/ParseMobyGamesHTMLFile.r", encoding = "UTF-8")
+list.files("1-datasource/1.2-mobygames/1.2.2-parser/functions/", full.names = TRUE) %>%
+  walk(source, encoding = "UTF-8")
 
 # ==============================================================================
 # READ FILES

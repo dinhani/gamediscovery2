@@ -1,15 +1,13 @@
 # ==============================================================================
 # LIBRARIES
 # ==============================================================================
-source("libraries.r", encoding = "UTF-8")
+source("libs/packages.r", encoding = "UTF-8")
 
 # ==============================================================================
 # FUNCTIONS
 # ==============================================================================
-source("1-datasource/1.1-wikidata/1.1.1-downloader/functions/QueryWikidata.r", encoding = "UTF-8")
-source("1-datasource/1.1-wikidata/1.1.1-downloader/functions/SaveWikidata.r", encoding = "UTF-8")
-source("1-datasource/1.1-wikidata/1.1.1-downloader/functions/DownloadRelationships.r", encoding = "UTF-8")
-source("1-datasource/1.1-wikidata/1.1.1-downloader/functions/DownloadRelationshipsOfGames.r", encoding = "UTF-8")
+list.files("1-datasource/1.1-wikidata/1.1.1-downloader/functions/", full.names = TRUE) %>%
+  walk(source, encoding = "UTF-8")
 
 # ==============================================================================
 # DOWNLOAD - GAMES

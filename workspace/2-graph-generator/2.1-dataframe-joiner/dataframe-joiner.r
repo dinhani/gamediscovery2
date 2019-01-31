@@ -1,12 +1,13 @@
 # ==============================================================================
 # LIBRARIES
 # ==============================================================================
-source("libraries.r", encoding = "UTF-8")
+source("libs/packages.r", encoding = "UTF-8")
 
 # ==============================================================================
 # FUNCTIONS
 # ==============================================================================
-source("2-graph-generator/2.1-dataframe-joiner/functions/MergeColumns.r", encoding = "UTF-8")
+list.files("2-graph-generator/2.1-dataframe-joiner/functions/", full.names = TRUE) %>%
+  walk(source, encoding = "UTF-8")
 
 # ==============================================================================
 # READ GAMES
