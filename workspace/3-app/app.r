@@ -76,7 +76,7 @@ server <- function(input, output, session) {
     }
     # search by feature
     if (!has_game & has_features) {
-      games_debug <- tibble(Debug = "")
+      games_debug <- tibble(Debug = "", Similarity = "-")
       games <- QueryByFeatures(g, g_es, filters_vertices)
     }
     # search by game and feature
@@ -84,7 +84,7 @@ server <- function(input, output, session) {
       filters.game <- filters_vertices[filters_types == "Game"][1]
       filters.features <- filters_vertices[filters_types != "Game"]
 
-      games_debug <- tibble(Debug = "")
+      games_debug <- tibble(Debug = "", Similarity = "-")
       games <- QueryByGameAndFeatures(g, g_es, filters.game, filters.features)
     }
 
@@ -108,8 +108,7 @@ server <- function(input, output, session) {
                  <div style='display:inline-block; width: 200px; margin-right: 1rem; margin-bottom: 1rem; vertical-align:top;'>{.x$Type} - {.x$Label}</div>
                 ")
           %>%
-            sort()
-            %>%
+            sort() %>%
             paste(collapse = "")
         )
       ),
