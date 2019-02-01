@@ -13,16 +13,16 @@ list.files("1-datasource/1.2-mobygames/1.2.2-parser/functions/", full.names = TR
 # READ FILES
 # ==============================================================================
 games.files <- list.files("1-datasource/1.2-mobygames/1.2.1-downloader/data/", pattern = "*.html", full.names = TRUE)
+games.files2 <- head(games.files, 1000)
 
 # ==============================================================================
 # PARSE FILES
 # ==============================================================================
-plan(multiprocess, workers = 1)
-games <- future_map_dfr(games.files, ParseMobyGamesHTMLFile, .progress = TRUE) %>%
-  mutate(
-    Platform = if_else(is.na(Platforms), Platform, Platforms)
-  ) %>%
-  set_names(paste0("MB_", colnames(.)))
+plan(multiprocess, workers = 7)
+
+games <- future_map_dfr(games.files, ParseMobyGamesHTMLFile, .progress = TRUE)
+games$Platform <- ifelse(is.na(games$Platforms), games$Platform, games$Platforms)
+colnames(games) <- paste0("MB_", colnames(games))
 
 # ==============================================================================
 # SAVE GAMES

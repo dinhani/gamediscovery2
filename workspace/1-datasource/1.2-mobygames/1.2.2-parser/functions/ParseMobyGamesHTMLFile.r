@@ -3,15 +3,20 @@
 # ==============================================================================
 ParseMobyGamesHTMLFile <- function(filename) {
 
+  # parse file size
+  if (file.size(filename) == 0) {
+    return(NULL)
+  }
+
   # parse game id
   game.id <- str_extract(filename, "(?<=data/)(.+)(?=.html)")
 
   # read HTML
-  html <- read_html(filename)
+  doc <- read_html(file(filename))
 
   # parse release and genre
-  game.release <- ParseMobyGamesSection(html, "#coreGameRelease div")
-  game.genre <- ParseMobyGamesSection(html, "#coreGameGenre div div")
+  game.release <- ParseMobyGamesSection(doc, "//div[@id='coreGameRelease']/div")
+  game.genre <- ParseMobyGamesSection(doc, "//div[@id='coreGameGenre']/div")
 
   # check which dataframe have data
   if (is.data.frame(game.release) && is.data.frame(game.genre)) {
@@ -25,8 +30,10 @@ ParseMobyGamesHTMLFile <- function(filename) {
   }
 
   # parse description
-  game.description <- html %>% html_node(css = ".col-md-8.col-lg-8") %>% html_text() %>% str_replace_all("\n", " ")
-  game.description <- str_extract(game.description, "(?<=\\?Description).+(?=\\[edit description)")
+  description_nodes <- html_node(doc, xpath = "//div[@class='col-md-8 col-lg-8']")
+  description_text <- html_text(description_nodes)
+  description_text <- str_replace_all(description_text, "\n", " ")
+  game.description <- str_extract(description_text, "(?<=\\?Description).+(?=\\[edit description)")
 
   # generate final dataframe
   data.frame(
@@ -38,23 +45,23 @@ ParseMobyGamesHTMLFile <- function(filename) {
 }
 ParseMobyGamesHTMLFile <- possibly(ParseMobyGamesHTMLFile, otherwise = NULL)
 
-ParseMobyGamesSection <- function(html, selector) {
+ParseMobyGamesSection <- function(doc, selector) {
   # get attributes from section
-  html.nodes <- html %>%
-    html_nodes(css = selector) %>%
-    sapply(html_text)
+  section_nodes <- html_nodes(doc, xpath = selector)
+  if (length(section_nodes) == 1) {
+    section_texts <- html_text(html_children(section_nodes))
+  } else {
+    section_texts <- html_text(section_nodes)
+  }
 
   # transform to dataframe
-  df <- html.nodes %>%
-    rollapply(width = 2, by = 2, FUN = c) %>%
-    t() %>%
-    data.frame(stringsAsFactors = FALSE)
-
-  # set first line as column names
+  df <- rollapply(section_texts, width = 2, by = 2, FUN = c)
+  df <- t(df)
   colnames(df) <- df[1, ]
-  df <- df[-1, ]
+  df <- df[-1, , drop = FALSE]
+  df <- data.frame(df, stringsAsFactors = FALSE)
 
   # split column values
-  df %>% mutate_all(str_split, pattern = ", ")
+  mutate_all(df, str_split, pattern = ", ")
 }
 ParseMobyGamesSection <- possibly(ParseMobyGamesSection, otherwise = NULL)
