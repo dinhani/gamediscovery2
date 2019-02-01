@@ -97,7 +97,6 @@ server <- function(input, output, session) {
     results <- search_games()
 
     # transform games into a table
-    print(results)
     games_df <- tibble(
       Cover = paste0("<img src=\"", results$Games$Cover, "\">"),
       Label = results$Games$Label,
