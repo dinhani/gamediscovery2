@@ -8,7 +8,7 @@ ParseWikpidiaHTMLFile <- function(filename) {
   }
 
   # parse game id
-  game.id <- str_extract(filename, "(?<=data/)(.+)(?=.html)")
+  game_id <- str_extract(filename, "(?<=data/)(.+)(?=.html)")
 
   # read HTML
   doc <- tryCatch({
@@ -20,21 +20,21 @@ ParseWikpidiaHTMLFile <- function(filename) {
   # parse description
   description_nodes <- html_nodes(doc, xpath = "//p")
   description_text <- html_text(description_nodes)
-  game.description <- paste(description_text, collapse = " ")
+  game_description <- paste(description_text, collapse = " ")
 
   # parse game image
-  image_nodes <- html_nodes(doc, xpath = "//div/div/a/img")
+  image_nodes <- html_nodes(doc, xpath = "//table[@class='infobox hproduct']//img")
   image_srcs <- html_attr(image_nodes, "src")
-  game.image <- head(image_srcs, 1)
-  if (length(game.image) == 0) {
-    game.image <- ""
+  game_image <- head(image_srcs, 1)
+  if (length(game_image) == 0) {
+    game_image <- ""
   }
 
   # generate final dataframe
   data.frame(
-    GameID = game.id,
-    Image = game.image,
-    Description = game.description,
+    GameID = game_id,
+    Image = game_image,
+    Description = game_description,
     stringsAsFactors = FALSE
   )
 }
