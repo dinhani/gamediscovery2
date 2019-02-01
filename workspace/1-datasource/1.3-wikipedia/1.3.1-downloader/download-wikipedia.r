@@ -6,7 +6,7 @@ source("libs/packages.r", encoding = "UTF-8")
 # ==============================================================================
 # READ GAMES
 # ==============================================================================
-games <- readRDS("1-datasource//1.1-wikidata/1.1.2-parser/data/games.rds")
+games <- readRDS("1-datasource/1.1-wikidata/1.1.2-parser/data/games.rds")
 
 # ==============================================================================
 # DOWNLOAD PAGES

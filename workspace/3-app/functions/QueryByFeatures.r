@@ -7,12 +7,11 @@ QueryByFeatures <- function(g, g.es, features) {
   features.edges <- g.es[inc(features)]
   features.edges.feature <- head_of(g, features.edges)
   features.edges.game <- tail_of(g, features.edges)
-  features.edges.weight <- edge_attr(g, "Weight", features.edges)
 
   # generate a table to perform calculations
   games.df1 <- data.table(
     Game = features.edges.game,
-    Weight = features.edges.weight
+    Weight = RecodeWeight(features.edges.feature$Type)
   )
 
   # calculate weight of games for the features

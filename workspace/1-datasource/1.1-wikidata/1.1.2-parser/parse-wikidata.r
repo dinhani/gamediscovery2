@@ -6,8 +6,7 @@ source("libs/packages.r", encoding = "UTF-8")
 # ==============================================================================
 # FUNCTIONS
 # ==============================================================================
-list.files("1-datasource/1.1-wikidata/1.1.2-parser/functions/", full.names = TRUE) %>%
-  walk(source, encoding = "UTF-8")
+list.files("1-datasource/1.1-wikidata/1.1.2-parser/functions/", full.names = TRUE) %>% walk(source, encoding = "UTF-8")
 
 # ==============================================================================
 # READ GAMES
@@ -22,7 +21,7 @@ games.base <- fread("1-datasource/1.1-wikidata/1.1.1-downloader/data/Game.tsv") 
 # ==============================================================================
 # READ GAMES RELATIONSHIPS
 # ==============================================================================
-games.relationships.files <- list.files("1-datasource/1.1-wikidata//1.1.1-downloader/data/", pattern = "Game-", full.names = TRUE)
+games.relationships.files <- list.files("1-datasource/1.1-wikidata/1.1.1-downloader/data/", pattern = "Game-", full.names = TRUE)
 games.relationships <- map(games.relationships.files, ParseWikidataRelationshipFile)
 
 # ==============================================================================

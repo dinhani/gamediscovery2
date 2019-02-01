@@ -80,7 +80,7 @@ GetWeapons <- function() {
       "Mosin-Nagant",
       "RPG-7",
       "SPAS-12",
-      list("SVD", "svd", "dragunov"),
+      list("SVD", "dragunov"),
       "Skorpion",
       "Thompson",
       "Uzi"

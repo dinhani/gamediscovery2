@@ -12,13 +12,12 @@ QueryByGame <- function(g, g.es, game) {
   features.edges <- g.es[inc(features.vertices)]
   features.edges.feature <- head_of(g, features.edges)
   features.edges.game <- tail_of(g, features.edges)
-  features.edges.weight <- edge_attr(g, "Weight", features.edges)
 
   # generate a table of related games with their features
   games.df1 <- data.table(
     Game = features.edges.game,
     FeatureType = features.edges.feature$Type,
-    Weight = features.edges.weight
+    Weight = RecodeWeight(features.edges.feature$Type)
   )
 
   # calculate weight intersection of features of related games with main game

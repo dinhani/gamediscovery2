@@ -6,13 +6,12 @@ source("libs/packages.r", encoding = "UTF-8")
 # ==============================================================================
 # FUNCTIONS
 # ==============================================================================
-list.files("2-graph-generator/2.6-dataframe-to-graph/functions/", full.names = TRUE) %>%
-  walk(source, encoding = "UTF-8")
+list.files("2-graph-generator/2.6-dataframe-to-graph/functions/", full.names = TRUE) %>% walk(source, encoding = "UTF-8")
 
 # ==============================================================================
 # READ GAMES
 # ==============================================================================
-games <- readRDS("2-graph-generator//2.5-dataframe-discarder/data/games.rds")
+games <- readRDS("2-graph-generator/2.5-dataframe-discarder/data/games.rds")
 
 # ==============================================================================
 # GENERATE GRAPH
@@ -52,7 +51,7 @@ graph.vertices <- graph.vertices.games %>%
 
 # EDGES
 graph.edges <- games.and.attributes %>%
-  select(ID, TypeID, Weight) %>%
+  select(ID, TypeID, Ocurrences) %>%
   distinct()
 
 # GRAPH

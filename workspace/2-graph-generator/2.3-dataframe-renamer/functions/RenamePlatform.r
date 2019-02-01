@@ -7,7 +7,7 @@ RenamePlatform <- function(platforms) {
   recode(platforms,
     # Arcade
     "arcade game machine" = "Arcade",
-    "platformsideo game arcade cabinet" = "Arcade",
+    "video game arcade cabinet" = "Arcade",
 
     # Atari
     "Atari 8-bit family" = "Atari 8-bit",
@@ -28,7 +28,7 @@ RenamePlatform <- function(platforms) {
     "Genesis" = "SEGA Mega Driplatformse",
 
     # PlayStation
-    "PlayStation platformsR" = "PlayStation 4",
+    "PlayStation VR" = "PlayStation 4",
     "PlayStation 4 Pro" = "PlayStation 4",
 
     # Windows

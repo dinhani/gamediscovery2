@@ -6,8 +6,7 @@ source("libs/packages.r", encoding = "UTF-8")
 # ==============================================================================
 # FUNCTIONS
 # ==============================================================================
-list.files("1-datasource/1.2-mobygames/1.2.2-parser/functions/", full.names = TRUE) %>%
-  walk(source, encoding = "UTF-8")
+list.files("1-datasource/1.2-mobygames/1.2.2-parser/functions/", full.names = TRUE) %>% walk(source, encoding = "UTF-8")
 
 # ==============================================================================
 # READ FILES

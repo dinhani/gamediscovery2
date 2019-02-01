@@ -1,10 +1,9 @@
 # ==============================================================================
-# Identity keywords in game names and texts and generate new rows for the found
-# values
+# Identity keywords in game texts and generate new rows for the found values
 # ==============================================================================
-IdentifyValues <- function(games.texts, games.tdm, type, values) {
+IdentifyValues <- function(games.attributes, games.tdm, type, values) {
   # identify values in game text
-  lapply(values, function(value){
+  map_dfr(values, function(value){
     # log
     print(value)
 
@@ -14,11 +13,9 @@ IdentifyValues <- function(games.texts, games.tdm, type, values) {
     games.rows   <- as.numeric(names(games.scores))
 
     # filter games by the scores found
-    games.texts[
+    games.attributes[
       games.rows,
-      .(ID, Name, Type = type, Value = value[[1]], WeightType = 0, WeightModifier = 1),
+      .(ID, Name, Type = type, Value = value[[1]], Ocurrences = games.scores),
       ]
-  }) %>%
-    rbindlist() %>%
-    unique()
+  })
 }

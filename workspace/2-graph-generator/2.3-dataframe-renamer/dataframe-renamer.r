@@ -6,8 +6,7 @@ source("libs/packages.r", encoding = "UTF-8")
 # ==============================================================================
 # FUNCTIONS
 # ==============================================================================
-list.files("2-graph-generator/2.3-dataframe-renamer/functions/", full.names = TRUE) %>%
-  walk(source, encoding = "UTF-8")
+list.files("2-graph-generator/2.3-dataframe-renamer/functions/", full.names = TRUE) %>% walk(source, encoding = "UTF-8")
 
 # ==============================================================================
 # READ GAMES

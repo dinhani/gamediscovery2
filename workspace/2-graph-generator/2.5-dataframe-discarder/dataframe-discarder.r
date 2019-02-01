@@ -17,7 +17,7 @@ games$Attributes <- games$Attributes %>%
     Remove = Type %in% c("GameMode", "Genre", "Platform") && n() < 30
   ) %>%
   filter(Remove == FALSE) %>%
-  select(ID, Name, Type, Value, Weight) %>%
+  select(ID, Name, Type, Value, Ocurrences) %>%
   ungroup() %>%
   distinct()
 

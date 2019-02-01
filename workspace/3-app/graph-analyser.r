@@ -6,8 +6,7 @@ source("libs/packages.r", encoding = "UTF-8")
 # ==============================================================================
 # FUNCTIONS
 # ==============================================================================
-list.files("3-app/functions/", full.names = TRUE) %>%
-  walk(source, encoding = "UTF-8")
+list.files("3-app/functions/", full.names = TRUE) %>% walk(source, encoding = "UTF-8")
 
 # ==============================================================================
 # READ GAMES
@@ -18,11 +17,11 @@ g.es <- E(g)
 # ==============================================================================
 # EXAMPLE QUERIES
 # ==============================================================================
-game.id <- "game-24589167" # God of War
-QueryByGame(g, g.es, game.id)$Label %>% head(20)
-ego(g, 1, game.id)
+game <- "game-24589167" # God of War
+QueryByGame(g, g.es, game)$Label %>% head(20)
+ego(g, 1, game)
 
 game.features <- c("platform-playstation-3", "mechanic-squad")
 QueryByFeatures(g, g.es, game.features)$Label
 
-QueryByGameAndFeatures(g, g.es, game.id, game.features)$Label %>% head(20)
+QueryByGameAndFeatures(g, g.es, game, game.features)$Label %>% head(20)

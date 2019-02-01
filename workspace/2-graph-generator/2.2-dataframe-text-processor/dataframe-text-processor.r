@@ -6,7 +6,7 @@ source("libs/packages.r", encoding = "UTF-8")
 # ==============================================================================
 # READ GAMES
 # ==============================================================================
-games <- readRDS("2-graph-generator//2.1-dataframe-joiner/data/games.rds")
+games <- readRDS("2-graph-generator/2.1-dataframe-joiner/data/games.rds")
 
 # ==============================================================================
 # PROCESS GAMES TEXTS
