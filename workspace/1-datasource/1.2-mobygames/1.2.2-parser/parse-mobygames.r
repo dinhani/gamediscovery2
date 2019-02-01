@@ -13,7 +13,6 @@ list.files("1-datasource/1.2-mobygames/1.2.2-parser/functions/", full.names = TR
 # READ FILES
 # ==============================================================================
 games.files <- list.files("1-datasource/1.2-mobygames/1.2.1-downloader/data/", pattern = "*.html", full.names = TRUE)
-games.files2 <- head(games.files, 1000)
 
 # ==============================================================================
 # PARSE FILES
