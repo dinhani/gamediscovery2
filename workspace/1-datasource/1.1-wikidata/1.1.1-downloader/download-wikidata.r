@@ -12,6 +12,8 @@ list.files("1-datasource/1.1-wikidata/1.1.1-downloader/functions/", full.names =
 # ==============================================================================
 # DOWNLOAD - GAMES
 # ==============================================================================
+plan(multiprocess, workers = 7)
+
 DownloadRelationshipsOfGames(entityLink = TRUE)
 
 DownloadRelationshipsOfGames("Platform", "wdt:P400")

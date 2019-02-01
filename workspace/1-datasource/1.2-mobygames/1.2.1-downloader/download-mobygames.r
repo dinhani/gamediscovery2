@@ -12,6 +12,7 @@ games <- readRDS("1-datasource/1.1-wikidata/1.1.2-parser/data/games.rds")
 # DOWNLOAD GAMES
 # ==============================================================================
 plan(multiprocess, workers = 2)
+
 future_walk2(games$WD_GameID, games$WD_MobyGamesLabel, .progress = TRUE, .f = safely(function(game.id.wikidata, game.id.mobygames) {
   # do not download if without id
   if (length(game.id.mobygames) == 0) {

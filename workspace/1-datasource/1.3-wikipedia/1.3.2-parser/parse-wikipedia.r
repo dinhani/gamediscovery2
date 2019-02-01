@@ -18,8 +18,9 @@ games.files <- list.files("1-datasource/1.3-wikipedia/1.3.1-downloader/data/", p
 # PARSE FILES
 # ==============================================================================
 plan(multiprocess, workers = 7)
+
 games <- future_map_dfr(games.files, ParseWikpidiaHTMLFile, .progress = TRUE)
-colnames(games) <- paste0("WP_", colnames(games))
+games <- set_names(games, paste0("WP_", colnames(games)))
 
 # ==============================================================================
 # SAVE GAMES

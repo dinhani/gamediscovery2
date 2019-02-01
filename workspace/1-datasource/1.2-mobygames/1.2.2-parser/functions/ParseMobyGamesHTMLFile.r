@@ -48,10 +48,15 @@ ParseMobyGamesHTMLFile <- possibly(ParseMobyGamesHTMLFile, otherwise = NULL)
 ParseMobyGamesSection <- function(doc, selector) {
   # get attributes from section
   section_nodes <- html_nodes(doc, xpath = selector)
-  if (length(section_nodes) == 1) {
+  if (length(section_nodes) %in% 1:2) {
     section_texts <- html_text(html_children(section_nodes))
   } else {
     section_texts <- html_text(section_nodes)
+  }
+  
+  # if odd divs, remove first div that is blank
+  if (length(section_texts) %% 2 == 1) {
+    section_texts <- section_texts[-1]
   }
 
   # transform to dataframe
