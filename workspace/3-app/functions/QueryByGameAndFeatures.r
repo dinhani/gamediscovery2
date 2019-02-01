@@ -8,5 +8,5 @@ QueryByGameAndFeatures <- function(g, g.es, game, features){
   results.byfeature <- QueryByFeatures(g, g.es, features)
 
   # intersect the results of both queries
-  V(g)[intersect(results.bygame, results.byfeature)]
+  V(g)[intersect(results.bygame$VertexID, results.byfeature)]
 }

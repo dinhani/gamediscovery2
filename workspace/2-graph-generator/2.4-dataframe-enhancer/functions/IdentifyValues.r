@@ -9,7 +9,7 @@ IdentifyValues <- function(games.attributes, games.tdm, type, values) {
 
     # find documents where value appear
     games.scores <- tm_term_score(games.tdm, tolower(value))
-    games.scores <- games.scores[games.scores >= 2]
+    games.scores <- games.scores[games.scores >= 5]
     games.rows   <- as.numeric(names(games.scores))
 
     # filter games by the scores found

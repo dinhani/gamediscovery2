@@ -18,7 +18,7 @@ g.es <- E(g)
 # EXAMPLE QUERIES
 # ==============================================================================
 game <- "game-24589167" # God of War
-QueryByGame(g, g.es, game)$Label %>% head(20)
+QueryByGame(g, g.es, game)
 ego(g, 1, game)
 
 game.features <- c("platform-playstation-3", "mechanic-squad")

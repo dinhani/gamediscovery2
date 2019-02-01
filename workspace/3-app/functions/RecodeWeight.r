@@ -11,7 +11,7 @@ RecodeWeight <- function(types) {
 
   recode(
     types,
-    
+
     "Series" = ULTRA,
 
     # HIGHEST
