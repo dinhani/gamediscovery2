@@ -41,7 +41,7 @@ games.attributes <- games.wikidata %>%
     GameMode = WD_GameModeLabel,
     Genre = MergeColumns(WD_GenreLabel, MB_Genre),
     Graphic = MergeColumns(MB_Perspective, MB_Visual, MB_Art, MB_Interface),
-    Mechanic = MergeColumns(MB_Gameplay, MB_Pacing),
+    Mechanic = MergeColumns(WD_MechanicLabel, MB_Gameplay, MB_Pacing),
 
     # PLOT
     Atmosphere = NULL,

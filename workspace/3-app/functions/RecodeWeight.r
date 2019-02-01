@@ -7,9 +7,12 @@ RecodeWeight <- function(types) {
   MEDIUM_HIGH <- 2
   HIGH <- 4
   HIGHEST <- 8
+  ULTRA <- 16
 
   recode(
     types,
+    
+    "Series" = ULTRA,
 
     # HIGHEST
     "Genre" = HIGHEST,
@@ -18,7 +21,7 @@ RecodeWeight <- function(types) {
 
     # HIGH
     "Graphics" = HIGH,
-    "Characte" = HIGH,
+    "Character" = HIGH,
     "Sport" = HIGH,
     "Vehicle" = HIGH,
 
@@ -27,7 +30,6 @@ RecodeWeight <- function(types) {
 
     # MEDIUM
     "Developer" = MEDIUM,
-    "Person" = MEDIUM,
 
     # NONE
     .default = NONE

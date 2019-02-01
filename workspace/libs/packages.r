@@ -13,10 +13,9 @@ library(igraph)
 library(xts)
 
 # Strings
+library(quanteda)
 library(tm)
-library(qdap)
 library(lettercase)
-library(RWeka)
 
 # Dates
 library(lubridate)
