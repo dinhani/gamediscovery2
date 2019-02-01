@@ -114,7 +114,11 @@ server <- function(input, output, session) {
             paste(collapse = "")
         )
       ),
-      Debug = map_chr(results$Debug$Debug, paste, collapse = "<br>")
+      Debug = paste(
+        map_chr(results$Debug$Debug, paste, collapse = "<br>"),
+        paste0("Similarity = ", results$Debug$Similarity),
+        sep = "<br><br>"
+      )
     )
 
     # render game table
