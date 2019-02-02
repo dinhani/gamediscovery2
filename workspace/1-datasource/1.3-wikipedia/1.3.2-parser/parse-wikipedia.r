@@ -18,7 +18,7 @@ games.files <- list.files("1-datasource/1.3-wikipedia/1.3.1-downloader/data/", p
 # ==============================================================================
 plan(multiprocess, workers = 7)
 
-games <- future_map_dfr(games.files, ParseWikpidiaHTMLFile, .progress = TRUE)
+games <- future_map_dfr(games.files, ParseWikipidiaHTMLFile, .progress = TRUE)
 games <- set_names(games, paste0("WP_", colnames(games)))
 
 # ==============================================================================

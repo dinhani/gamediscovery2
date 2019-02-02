@@ -1,7 +1,7 @@
 # ==============================================================================
 # Parse the Wikipedia page html file
 # ==============================================================================
-ParseWikpidiaHTMLFile <- function(filename) {
+ParseWikipidiaHTMLFile <- function(filename) {
   # parse file size
   if (file.size(filename) == 0) {
     return(NULL)
