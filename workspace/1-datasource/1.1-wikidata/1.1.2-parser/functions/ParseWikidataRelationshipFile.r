@@ -7,8 +7,8 @@ ParseWikidataRelationshipFile <- function(filename) {
   # read file
   df <- fread(filename)
 
-  # columns: [1=GameID, 2=GameLabel, 3=RelationshipID, 4=RelationshipLabel]
-  df[, c(1, 3, 4)] %>%
+  # columns: [1=GameLabel, 2=RelationshipLabel, 3=GameID, 4=RelationshipID]
+  df[, c(3, 4, 2)] %>%
     # parse IDs
     mutate_at(
       vars(ends_with("ID")),
