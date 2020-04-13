@@ -58,6 +58,9 @@ QueryWikidata <- function(entityPrefix, entityCondition, additionalEntityPrefix 
   # EXECUTE
   # ==========================================================================
   query <- str_interp(query)
+  query_encoded <- URLencode(query)
   print(query)
-  SPARQL(endpoint, query)$results
+  
+  url <- str_interp("${endpoint}?query=${query_encoded}")
+  fromJSON(url, simplifyVector = T, simplifyDataFrame = T)$results$bindings %>% map_dfr("value")
 }

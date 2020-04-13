@@ -23,7 +23,7 @@ library(lubridate)
 # Web
 library(httr)
 library(rvest)
-library(SPARQL)
+library(jsonlite)
 
 # Parallelism
 library(furrr)
